@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createThreadService, getLastMessageService, retrieveMarketingMateAssistantService, sendMessageService } from "../services/chatThreadService";
+import { createThreadService, getLastMessageService, retrieveMarketingMateAssistantService, sendMessageService } from "../services/chatThread";
 
 export const retrieveAssistant = async (req: Request, res: Response) => {
     try {
