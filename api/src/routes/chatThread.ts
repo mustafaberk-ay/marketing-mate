@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createThread, getLastMessage, retrieveAssistant, sendMessage } from "../controllers/chatThreadController";
+import { createThread, getLastMessage, retrieveAssistant, sendMessage } from "../controllers/chatThread";
 
 export const chatThreadRouter = Router();
 
