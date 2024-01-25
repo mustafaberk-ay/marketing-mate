@@ -3,3 +3,9 @@ export type lastMessageObjType = {
 	lastMessageId: string,
 	role: string
 }
+
+export enum roleTypes {
+	System = "system",
+	User = "user",
+	Assistant = "assistant"
+}
