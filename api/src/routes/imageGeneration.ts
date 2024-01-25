@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createImageVariations, editImage, generateImage } from "../controllers/imageGenerationController";
+import { createImageVariations, editImage, generateImage } from "../controllers/imageGeneration";
 
 export const imageGenerationRouter = Router();
 
