@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createImageVariationService, editImageService, generateImageService } from "../services/imageGenerationService";
+import { createImageVariationService, editImageService, generateImageService } from "../services/imageGeneration";
 
 export const generateImage = async (req: Request, res: Response) => {
     try {
