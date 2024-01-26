@@ -1,15 +1,16 @@
 import mongoose, { Date, Document } from 'mongoose';
+import { RoleEnum } from '../type';
 
 export type MessageDocument = Document & {
 	thread_id: number;
-	role: string;
+	role: keyof typeof RoleEnum;
 	content: string;
 	created_at: Date;
 };
 
 export const MessageSchema = new mongoose.Schema({
-	thread_id: { type: String, required: true },
-	role: { type: String, required: true },
+	thread_id: { type: Number, required: true },
+	role: { type: String, enum: Object.values(RoleEnum), required: true },
 	content: { type: String, required: true },
 	created_at: { type: Date, default: Date.now },
 });

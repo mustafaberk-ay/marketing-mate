@@ -4,8 +4,10 @@ export type lastMessageObjType = {
 	role: string
 }
 
-export enum roleTypes {
-	System = "system",
-	User = "user",
-	Assistant = "assistant"
+export enum RoleEnum {
+	function = 'function',
+	system = 'system',
+	user = 'user',
+	assistant = 'assistant',
+	tool = 'tool',
 }
