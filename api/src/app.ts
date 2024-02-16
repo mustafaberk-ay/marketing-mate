@@ -6,6 +6,7 @@ import { chatThreadRouter } from './routes/chatThread';
 import { imageGenerationRouter } from './routes/imageGeneration';
 import { messageRouter } from './routes/message';
 import { phoneCallRouter } from './routes/phoneCall';
+import { whatsappMessageRouter } from './routes/whatsappMessage';
 
 dotenv.config();
 const app: Application = express();
@@ -17,5 +18,6 @@ app.use('/chatThread', chatThreadRouter);
 app.use('/imageGeneration', imageGenerationRouter);
 app.use('/message', messageRouter);
 app.use('/phoneCall', phoneCallRouter)
+app.use('/whatsapp', whatsappMessageRouter)
 
 export default app;

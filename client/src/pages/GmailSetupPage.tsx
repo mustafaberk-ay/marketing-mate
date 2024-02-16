@@ -54,7 +54,7 @@ const GmailSetupPage: React.FC<GmailSetupPageProps> = ({
 			<br />
 			<Link to='/meta-setup-page'>Previous</Link>
 			<br />
-			<Link to='/'>Next</Link>
+			<Link to='/whatsapp-setup-page'>Next</Link>
 			<br />
 			<Link to='/'>Quit</Link>
 		</div>
