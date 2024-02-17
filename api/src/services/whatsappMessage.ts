@@ -45,7 +45,7 @@ export async function sendWhatsappMessageService(
 	contactName: string,
 	messageContent: string
 ) {
-	const options = new chrome.Options();
+	var options = new chrome.Options();
 	options.addArguments(
 		'user-data-dir=C:\\Users\\Mustafa\\AppData\\Local\\Google\\Chrome\\User Data'
 	);
@@ -60,13 +60,12 @@ export async function sendWhatsappMessageService(
 	options.addArguments('--disable-popup-blocking');
 	options.addArguments('--disable-web-security');
 
-	const driver: WebDriver = await new Builder()
+	const driver = new Builder()
 		.forBrowser(Browser.CHROME)
 		.setChromeOptions(options)
 		.build();
 
 	await driver.get('https://web.whatsapp.com/');
-
 	await driver.wait(
 		until.elementLocated(By.css("[title='Search input textbox']"))
 	);
@@ -77,14 +76,17 @@ export async function sendWhatsappMessageService(
 		By.css("[title='Search input textbox']")
 	);
 	await searchInput.sendKeys(contactName);
-	let element: WebElement = await driver.wait(
-		until.elementLocated(By.css('span[title="Annem2"]')),
-		10000
+
+	await driver.wait(
+		until.elementLocated(By.xpath(`//span[@title='${contactName}']`))
 	);
 
-	console.log('element located')
-	await element.click()
-	console.log('element clicked')
+	//await driver.sleep(1000)
+
+	const contact = await driver.findElement(
+		By.xpath(`//span[@title='${contactName}']`)
+	);
+	await contact.click();
 
 	await driver.wait(until.elementLocated(By.css("[title='Type a message']")));
 
@@ -110,5 +112,8 @@ export async function sendWhatsappMessageService(
 		).length;
 	}
 
+	//console.log(finalSentMessageCount, 'finalSentMessageCount')
+
 	await driver.quit();
+	return 'Whatsapp Message Sent Successfully';
 }
