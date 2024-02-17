@@ -5,14 +5,14 @@ import MetaSetupPage from './pages/MetaSetupPage';
 import { useState } from 'react';
 import GmailSetupPage from './pages/GmailSetupPage';
 import WhatsappSetupPage from './pages/WhatsappSetupPage';
+import TwilioSetupPage from './pages/TwilioSetupPage';
 
 function App() {
 	const [facebookUserAccessToken, setFacebookUserAccessToken] =
 		useState<string>('');
 	const [gmailAddress, setGmailAddress] = useState<string>('');
 	const [gmailAppPassword, setGmailAppPassword] = useState<string>('');
-	const [isWhatsappSetupComplete, setIsWhatsappSetupComplete] =
-		useState<boolean>(false);
+	const [salesPhoneNumber, setSalesPhoneNumber] = useState<string>('');
 
 	return (
 		<>
@@ -44,10 +44,14 @@ function App() {
 					/>
 					<Route
 						path='/whatsapp-setup-page'
+						element={<WhatsappSetupPage />}
+					/>
+					<Route
+						path='/twilio-setup-page'
 						element={
-							<WhatsappSetupPage
-								isWhatsappSetupComplete={isWhatsappSetupComplete}
-								setIsWhatsappSetupComplete={setIsWhatsappSetupComplete}
+							<TwilioSetupPage
+								salesPhoneNumber={salesPhoneNumber}
+								setSalesPhoneNumber={setSalesPhoneNumber}
 							/>
 						}
 					/>
