@@ -1,25 +1,18 @@
-import React from 'react';
-import { WebDriver, Builder, By, until, Browser } from 'selenium-webdriver';
-import chrome from 'selenium-webdriver/chrome';
+import { Link } from "react-router-dom";
 
-interface WhatsappSetupPageProps {
-	isWhatsappSetupComplete: boolean;
-	setIsWhatsappSetupComplete: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const WhatsappSetupPage: React.FC<WhatsappSetupPageProps> = ({
-	isWhatsappSetupComplete,
-	setIsWhatsappSetupComplete,
-}) => {
+const WhatsappSetupPage = () => {
 	const setupWhatsappButtonClicked = async () => {
-		
+		const res = await fetch('http://localhost:3000/whatsapp/setupWhatsapp')
+		console.log(res)
 	};
 
 	return (
 		<div>
 			<h1>Whatsapp Setup Page</h1>
-            {isWhatsappSetupComplete ? <p>Whatsapp Setup Already Completed</p> : ''}
 			<button onClick={setupWhatsappButtonClicked}>Setup Whatsapp</button>
+			<Link to='/gmail-setup-page'>Previous</Link>
+			<Link to='/twilio-setup-page'>Next</Link>
+			<Link to='/'>Quit</Link>
 		</div>
 	);
 };
