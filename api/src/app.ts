@@ -1,12 +1,13 @@
-import express, { Express, Request, Response , Application } from 'express';
+import express, { Express, Request, Response, Application } from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 import { chatThreadRouter } from './routes/chatThread';
 import { imageGenerationRouter } from './routes/imageGeneration';
-import { messageRouter } from './routes/message';
+import { dbMessageRouter } from './routes/dbMessage';
 import { phoneCallRouter } from './routes/phoneCall';
 import { whatsappMessageRouter } from './routes/whatsappMessage';
+import { dbUserInfoRouter } from './routes/dbUserInfo';
 
 dotenv.config();
 const app: Application = express();
@@ -16,8 +17,11 @@ app.use(bodyParser.json());
 
 app.use('/chatThread', chatThreadRouter);
 app.use('/imageGeneration', imageGenerationRouter);
-app.use('/message', messageRouter);
-app.use('/phoneCall', phoneCallRouter)
-app.use('/whatsapp', whatsappMessageRouter)
+app.use('/phoneCall', phoneCallRouter);
+app.use('/whatsappMessage', whatsappMessageRouter);
+
+//db routers
+app.use('/message', dbMessageRouter);
+app.use('/user-info', dbUserInfoRouter);
 
 export default app;
