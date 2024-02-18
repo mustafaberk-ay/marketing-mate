@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 interface TwilioSetupPageProps {
 	salesPhoneNumber: string;
@@ -13,7 +14,7 @@ const TwilioSetupPage: React.FC<TwilioSetupPageProps> = ({
 
 	return (
 		<div>
-			<h1>Twilio Setup Page</h1>
+			<h1>Step 4: Cold Call Setup Page</h1>
 			<h2>Saved Sales Assistant Phone Number: {salesPhoneNumber}</h2>
 			<h3>Enter a phone number to redirect calls from interested customers</h3>
 			<input
@@ -23,6 +24,10 @@ const TwilioSetupPage: React.FC<TwilioSetupPageProps> = ({
 			/>
 			<br />
 			<button onClick={savePhoneNumberButtonOnClick}>Save Phone Number</button>
+			<br />
+			<Link to='/whatsapp-setup-page'>Previous</Link>
+			<Link to='/setup-summary-page'>Next</Link>
+			<Link to='/'>Quit</Link>
 		</div>
 	);
 

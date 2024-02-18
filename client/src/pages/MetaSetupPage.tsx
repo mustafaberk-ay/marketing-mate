@@ -34,9 +34,9 @@ const MetaSetupPage: React.FC<MetaSetupPageProps> = ({
 			<h1>Step 1: Facebook and Instagram Setup</h1>
 			<h3>Login with Facebook</h3>
 			{facebookUserAccessToken ? (
-				<p>Facebook User Access Token is received successfully.</p>
+				<p>Logged in with Facebook successfully</p>
 			) : (
-				<p>Facebook User Access Token does not exist.</p>
+				<p>Not logged in with Facebook yet</p>
 			)}
 			<button onClick={logInToFB}>Login with Facebook</button>
 			<br />
