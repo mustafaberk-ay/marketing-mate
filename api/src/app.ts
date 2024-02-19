@@ -8,6 +8,7 @@ import { dbMessageRouter } from './routes/dbMessage';
 import { phoneCallRouter } from './routes/phoneCall';
 import { whatsappMessageRouter } from './routes/whatsappMessage';
 import { dbUserInfoRouter } from './routes/dbUserInfo';
+import { gmailEmailRouter } from './routes/gmailEmail';
 
 dotenv.config();
 const app: Application = express();
@@ -19,6 +20,7 @@ app.use('/chatThread', chatThreadRouter);
 app.use('/imageGeneration', imageGenerationRouter);
 app.use('/phoneCall', phoneCallRouter);
 app.use('/whatsappMessage', whatsappMessageRouter);
+app.use('/gmailEmail', gmailEmailRouter)
 
 //db routers
 app.use('/message', dbMessageRouter);
