@@ -5,6 +5,7 @@ interface SetupSummaryPageProps {
 	facebookUserAccessToken: string;
 	gmailAddress: string;
 	gmailAppPassword: string;
+	isWhatsappSetupCompleted: boolean;
 	salesPhoneNumber: string;
 	setIsSetupCompleted: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -13,6 +14,7 @@ const SetupSummaryPage: React.FC<SetupSummaryPageProps> = ({
 	facebookUserAccessToken,
 	gmailAddress,
 	gmailAppPassword,
+	isWhatsappSetupCompleted,
 	salesPhoneNumber,
 	setIsSetupCompleted,
 }) => {
@@ -32,11 +34,15 @@ const SetupSummaryPage: React.FC<SetupSummaryPageProps> = ({
 			) : (
 				<p>Please Setup Gmail App Password</p>
 			)}
+			<h3>Whatsapp Setup Info</h3>
+			{isWhatsappSetupCompleted ? <p>Whatsapp Setup is Successful</p> : <p>Whatsapp Setup is not done</p>}
 			<h3>Cold Call Setup Info</h3>
 			<p>Sales Assistant Phone Number: {salesPhoneNumber}</p>
 			<Link to='/'>
 				<button onClick={completeSetupButtonOnClick}>Complete Setup</button>
 			</Link>
+			<Link to='/twilio-setup-page'>Previous</Link>
+			<Link to='/'>Quit</Link>
 		</div>
 	);
 

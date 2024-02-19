@@ -13,6 +13,8 @@ function App() {
 		useState<string>('');
 	const [gmailAddress, setGmailAddress] = useState<string>('');
 	const [gmailAppPassword, setGmailAppPassword] = useState<string>('');
+	const [isWhatsappSetupCompleted, setIsWhatsappSetupCompleted] =
+		useState<boolean>(false);
 	const [salesPhoneNumber, setSalesPhoneNumber] = useState<string>('');
 	const [isSetupCompleted, setIsSetupCompleted] = useState<boolean>(false);
 
@@ -46,7 +48,12 @@ function App() {
 					/>
 					<Route
 						path='/whatsapp-setup-page'
-						element={<WhatsappSetupPage />}
+						element={
+							<WhatsappSetupPage
+								isWhatsappSetupCompleted={isWhatsappSetupCompleted}
+								setIsWhatsappSetupCompleted={setIsWhatsappSetupCompleted}
+							/>
+						}
 					/>
 					<Route
 						path='/twilio-setup-page'
@@ -64,6 +71,7 @@ function App() {
 								facebookUserAccessToken={facebookUserAccessToken}
 								gmailAddress={gmailAddress}
 								gmailAppPassword={gmailAppPassword}
+								isWhatsappSetupCompleted={isWhatsappSetupCompleted}
 								salesPhoneNumber={salesPhoneNumber}
 								setIsSetupCompleted={setIsSetupCompleted}
 							/>
