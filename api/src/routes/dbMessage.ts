@@ -1,5 +1,10 @@
-import { Router } from "express";
-import { createMessage, getHighestThreadId, getMessageById, getMessages } from "../controllers/dbMessage";
+import { Router } from 'express';
+import {
+	createMessage,
+	getHighestThreadId,
+	getMessageById,
+	getMessages,
+} from '../controllers/dbMessage';
 
 export const dbMessageRouter = Router();
 

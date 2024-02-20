@@ -20,7 +20,7 @@ app.use('/chatThread', chatThreadRouter);
 app.use('/imageGeneration', imageGenerationRouter);
 app.use('/phoneCall', phoneCallRouter);
 app.use('/whatsappMessage', whatsappMessageRouter);
-app.use('/gmailEmail', gmailEmailRouter)
+app.use('/gmailEmail', gmailEmailRouter);
 
 //db routers
 app.use('/message', dbMessageRouter);

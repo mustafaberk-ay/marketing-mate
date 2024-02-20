@@ -7,6 +7,7 @@ import GmailSetupPage from './pages/GmailSetupPage';
 import WhatsappSetupPage from './pages/WhatsappSetupPage';
 import TwilioSetupPage from './pages/TwilioSetupPage';
 import SetupSummaryPage from './pages/SetupSummaryPage';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
 	const [facebookUserAccessToken, setFacebookUserAccessToken] =
@@ -76,6 +77,10 @@ function App() {
 								setIsSetupCompleted={setIsSetupCompleted}
 							/>
 						}
+					/>
+					<Route
+						path='/profile-page'
+						element={<ProfilePage />}
 					/>
 				</Routes>
 			</div>
