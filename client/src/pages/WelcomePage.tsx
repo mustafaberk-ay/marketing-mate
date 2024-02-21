@@ -3,6 +3,7 @@ import LoginButton from '../components/LoginButton';
 import { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import LogoutButton from '../components/LogoutButton';
+import RegisterButton from '../components/RegisterButton';
 
 interface WelcomePageProps {
 	isSetupCompleted: boolean;
@@ -59,6 +60,7 @@ const WelcomePage: React.FC<WelcomePageProps> = ({
 				</div>
 			) : (
 				<div>
+					<RegisterButton />
 					<LoginButton />
 				</div>
 			)}
