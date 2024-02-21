@@ -92,7 +92,7 @@ function App() {
 					/>
 					<Route
 						path='/profile-page'
-						element={<ProfilePage token={token} />}
+						element={<ProfilePage token={token} userId={userId}/>}
 					/>
 				</Routes>
 			</div>
