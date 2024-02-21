@@ -18,6 +18,10 @@ function App() {
 		useState<boolean>(false);
 	const [salesPhoneNumber, setSalesPhoneNumber] = useState<string>('');
 	const [isSetupCompleted, setIsSetupCompleted] = useState<boolean>(false);
+	const [token, setToken] = useState<string>('');
+	const [userId, setUserId] = useState<string>('');
+
+	console.log(userId, 'uid');
 
 	return (
 		<>
@@ -25,7 +29,14 @@ function App() {
 				<Routes>
 					<Route
 						path='/'
-						element={<WelcomePage isSetupCompleted={isSetupCompleted} />}
+						element={
+							<WelcomePage
+								isSetupCompleted={isSetupCompleted}
+								token={token}
+								setToken={setToken}
+								setUserId={setUserId}
+							/>
+						}
 					/>
 					<Route
 						path='/meta-setup-page'
@@ -74,13 +85,14 @@ function App() {
 								gmailAppPassword={gmailAppPassword}
 								isWhatsappSetupCompleted={isWhatsappSetupCompleted}
 								salesPhoneNumber={salesPhoneNumber}
+								userId={userId}
 								setIsSetupCompleted={setIsSetupCompleted}
 							/>
 						}
 					/>
 					<Route
 						path='/profile-page'
-						element={<ProfilePage />}
+						element={<ProfilePage token={token} />}
 					/>
 				</Routes>
 			</div>

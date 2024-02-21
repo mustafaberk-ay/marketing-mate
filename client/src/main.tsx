@@ -14,6 +14,8 @@ const renderApp = (): void => {
 					clientId='DFwsX4CJdmwcUH9GnoyRjK1mteNvxKDM'
 					authorizationParams={{
 						redirect_uri: window.location.origin,
+						audience: 'https://dev-i5pphm8b3pi7nmbn.us.auth0.com/api/v2/',
+						scope: 'read:current_user update:current_user_metadata',
 					}}
 				>
 					<App />

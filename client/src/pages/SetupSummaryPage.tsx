@@ -7,6 +7,7 @@ interface SetupSummaryPageProps {
 	gmailAppPassword: string;
 	isWhatsappSetupCompleted: boolean;
 	salesPhoneNumber: string;
+	userId: string
 	setIsSetupCompleted: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -16,6 +17,7 @@ const SetupSummaryPage: React.FC<SetupSummaryPageProps> = ({
 	gmailAppPassword,
 	isWhatsappSetupCompleted,
 	salesPhoneNumber,
+	userId,
 	setIsSetupCompleted,
 }) => {
 	return (
@@ -62,6 +64,7 @@ const SetupSummaryPage: React.FC<SetupSummaryPageProps> = ({
 					gmail_address: encryptedGmailAddress,
 					gmail_app_password: encryptedGmailAppPassword,
 					assistant_phone_number: encryptedSalesPhoneNumber,
+					user_id: userId
 				}),
 			});
 		} catch (error) {
