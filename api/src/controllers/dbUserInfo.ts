@@ -12,6 +12,7 @@ export const createUserInfo = async (req: Request, res: Response) => {
 			gmail_address: req.body.gmail_address,
 			gmail_app_password: req.body.gmail_app_password,
 			assistant_phone_number: req.body.assistant_phone_number,
+			user_id: req.body.user_id
 		});
 		const response = await createUserInfoService(userInfoInstance);
 		res.json(response);
