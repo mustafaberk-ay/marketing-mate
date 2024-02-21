@@ -64,9 +64,10 @@ const SetupSummaryPage: React.FC<SetupSummaryPageProps> = ({
 					gmail_address: encryptedGmailAddress,
 					gmail_app_password: encryptedGmailAppPassword,
 					assistant_phone_number: encryptedSalesPhoneNumber,
-					user_id: userId
+					_id: userId
 				}),
 			});
+			console.log(res)
 		} catch (error) {
 			console.log(error)
 		}
