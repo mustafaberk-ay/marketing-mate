@@ -11,3 +11,16 @@ export const createUserInfoService = async (
 ): Promise<UserInfoDocument | undefined> => {
 	return userInfo.save();
 };
+
+export const isUserInfoExistsService = async (id: string): Promise<boolean> => {
+	const userInfo = await getUserInfoByIdService(id);
+	return userInfo !== null;
+};
+
+export const updateUserInfoService = async (
+	id: string,
+	updateData: Partial<UserInfoDocument>
+): Promise<UserInfoDocument | null> => {
+	const updatedUserInfo = await UserInfo.findByIdAndUpdate(id, updateData)
+	return updatedUserInfo
+};
