@@ -99,7 +99,6 @@ export async function sendWhatsappMessageService(
 	const initialSentMessageCount = await (
 		await driver.findElements(By.css(sentStatusSelector))
 	).length;
-	//console.log(initialSentMessageCount, 'initialSentMessageCount');
 
 	let finalSentMessageCount = await (
 		await driver.findElements(By.css(sentStatusSelector))
@@ -111,8 +110,6 @@ export async function sendWhatsappMessageService(
 			await driver.findElements(By.css(sentStatusSelector))
 		).length;
 	}
-
-	//console.log(finalSentMessageCount, 'finalSentMessageCount')
 
 	await driver.quit();
 	return 'Whatsapp Message Sent Successfully';
