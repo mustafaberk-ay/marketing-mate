@@ -4,6 +4,8 @@ import App from './App.tsx';
 import { BrowserRouter } from 'react-router-dom';
 import initFacebookSDK from './utils/initFacebookSDK.ts';
 import { Auth0Provider } from '@auth0/auth0-react';
+import { store } from './redux/store.ts';
+import { Provider } from 'react-redux';
 
 const renderApp = (): void => {
 	ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -18,7 +20,9 @@ const renderApp = (): void => {
 						scope: 'read:current_user update:current_user_metadata',
 					}}
 				>
-					<App />
+					<Provider store={store}>
+						<App />
+					</Provider>
 				</Auth0Provider>
 			</BrowserRouter>
 		</React.StrictMode>
@@ -27,5 +31,4 @@ const renderApp = (): void => {
 
 initFacebookSDK().then(() => {
 	renderApp();
-	console.log('initialized facebook sdk');
 });

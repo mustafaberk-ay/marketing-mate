@@ -2,7 +2,6 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import WelcomePage from './pages/WelcomePage';
 import MetaSetupPage from './pages/MetaSetupPage';
-import { useState } from 'react';
 import GmailSetupPage from './pages/GmailSetupPage';
 import WhatsappSetupPage from './pages/WhatsappSetupPage';
 import TwilioSetupPage from './pages/TwilioSetupPage';
@@ -10,89 +9,37 @@ import SetupSummaryPage from './pages/SetupSummaryPage';
 import ProfilePage from './pages/ProfilePage';
 
 function App() {
-	const [facebookUserAccessToken, setFacebookUserAccessToken] =
-		useState<string>('');
-	const [gmailAddress, setGmailAddress] = useState<string>('');
-	const [gmailAppPassword, setGmailAppPassword] = useState<string>('');
-	const [isWhatsappSetupCompleted, setIsWhatsappSetupCompleted] =
-		useState<boolean>(false);
-	const [salesPhoneNumber, setSalesPhoneNumber] = useState<string>('');
-	const [isSetupCompleted, setIsSetupCompleted] = useState<boolean>(false);
-	const [token, setToken] = useState<string>('');
-	const [userId, setUserId] = useState<string>('');
-
-	console.log(userId, 'uid');
-
 	return (
 		<>
 			<div>
 				<Routes>
 					<Route
 						path='/'
-						element={
-							<WelcomePage
-								isSetupCompleted={isSetupCompleted}
-								token={token}
-								setToken={setToken}
-								setUserId={setUserId}
-							/>
-						}
+						element={<WelcomePage />}
 					/>
 					<Route
 						path='/meta-setup-page'
-						element={
-							<MetaSetupPage
-								facebookUserAccessToken={facebookUserAccessToken}
-								setFacebookUserAccessToken={setFacebookUserAccessToken}
-							/>
-						}
+						element={<MetaSetupPage />}
 					/>
 					<Route
 						path='/gmail-setup-page'
-						element={
-							<GmailSetupPage
-								gmailAddress={gmailAddress}
-								setGmailAddress={setGmailAddress}
-								gmailAppPassword={gmailAppPassword}
-								setGmailAppPassword={setGmailAppPassword}
-							/>
-						}
+						element={<GmailSetupPage />}
 					/>
 					<Route
 						path='/whatsapp-setup-page'
-						element={
-							<WhatsappSetupPage
-								isWhatsappSetupCompleted={isWhatsappSetupCompleted}
-								setIsWhatsappSetupCompleted={setIsWhatsappSetupCompleted}
-							/>
-						}
+						element={<WhatsappSetupPage />}
 					/>
 					<Route
 						path='/twilio-setup-page'
-						element={
-							<TwilioSetupPage
-								salesPhoneNumber={salesPhoneNumber}
-								setSalesPhoneNumber={setSalesPhoneNumber}
-							/>
-						}
+						element={<TwilioSetupPage />}
 					/>
 					<Route
 						path='/setup-summary-page'
-						element={
-							<SetupSummaryPage
-								facebookUserAccessToken={facebookUserAccessToken}
-								gmailAddress={gmailAddress}
-								gmailAppPassword={gmailAppPassword}
-								isWhatsappSetupCompleted={isWhatsappSetupCompleted}
-								salesPhoneNumber={salesPhoneNumber}
-								userId={userId}
-								setIsSetupCompleted={setIsSetupCompleted}
-							/>
-						}
+						element={<SetupSummaryPage />}
 					/>
 					<Route
 						path='/profile-page'
-						element={<ProfilePage token={token} userId={userId}/>}
+						element={<ProfilePage />}
 					/>
 				</Routes>
 			</div>
