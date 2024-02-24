@@ -1,45 +1,33 @@
 import { Link } from 'react-router-dom';
 import { encryptData } from '../utils/encryptionUtils';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+import { setIsSetupCompleted } from '../redux/slices/userInfoSlice';
 
-interface SetupSummaryPageProps {
-	facebookUserAccessToken: string;
-	gmailAddress: string;
-	gmailAppPassword: string;
-	isWhatsappSetupCompleted: boolean;
-	salesPhoneNumber: string;
-	userId: string
-	setIsSetupCompleted: React.Dispatch<React.SetStateAction<boolean>>;
-}
+const SetupSummaryPage: React.FC = () => {
+	const dispatch = useDispatch()
+	const userInfo = useSelector((state: RootState) => state.user)
 
-const SetupSummaryPage: React.FC<SetupSummaryPageProps> = ({
-	facebookUserAccessToken,
-	gmailAddress,
-	gmailAppPassword,
-	isWhatsappSetupCompleted,
-	salesPhoneNumber,
-	userId,
-	setIsSetupCompleted,
-}) => {
 	return (
 		<div>
 			<h1>Step 5: Setup Summary</h1>
 			<h3>Facebook Login Status</h3>
-			{facebookUserAccessToken ? (
+			{userInfo.facebookUserAccessToken ? (
 				<p>Logged into Facebook Successfully</p>
 			) : (
 				<p>Not Logged into Facebook</p>
 			)}
 			<h3>Gmail Setup Info</h3>
-			<p>Gmail Address: {gmailAddress}</p>
-			{gmailAppPassword ? (
+			<p>Gmail Address: {userInfo.gmailAddress}</p>
+			{userInfo.gmailAppPassword ? (
 				<p>Gmail App Password Retrieved Successfully</p>
 			) : (
 				<p>Please Setup Gmail App Password</p>
 			)}
 			<h3>Whatsapp Setup Info</h3>
-			{isWhatsappSetupCompleted ? <p>Whatsapp Setup is Successful</p> : <p>Whatsapp Setup is not done</p>}
+			{userInfo.isWhatsappSetupCompleted ? <p>Whatsapp Setup is Successful</p> : <p>Whatsapp Setup is not done</p>}
 			<h3>Cold Call Setup Info</h3>
-			<p>Sales Assistant Phone Number: {salesPhoneNumber}</p>
+			<p>Sales Assistant Phone Number: {userInfo.salesPhoneNumber}</p>
 			<Link to='/'>
 				<button onClick={completeSetupButtonOnClick}>Complete Setup</button>
 			</Link>
@@ -50,11 +38,11 @@ const SetupSummaryPage: React.FC<SetupSummaryPageProps> = ({
 
 	async function completeSetupButtonOnClick() {
 		const encryptedFacebookUserAccessToken = encryptData(
-			facebookUserAccessToken
+			userInfo.facebookUserAccessToken
 		);
-		const encryptedGmailAddress = encryptData(gmailAddress);
-		const encryptedGmailAppPassword = encryptData(gmailAppPassword);
-		const encryptedSalesPhoneNumber = encryptData(salesPhoneNumber);
+		const encryptedGmailAddress = encryptData(userInfo.gmailAddress);
+		const encryptedGmailAppPassword = encryptData(userInfo.gmailAppPassword);
+		const encryptedSalesPhoneNumber = encryptData(userInfo.salesPhoneNumber);
 		try {
 			const res = await fetch('http://localhost:3000/user-info/createUserInfo', {
 				method: 'POST',
@@ -64,7 +52,7 @@ const SetupSummaryPage: React.FC<SetupSummaryPageProps> = ({
 					gmail_address: encryptedGmailAddress,
 					gmail_app_password: encryptedGmailAppPassword,
 					assistant_phone_number: encryptedSalesPhoneNumber,
-					_id: userId
+					_id: userInfo.userId
 				}),
 			});
 			console.log(res)
@@ -72,7 +60,7 @@ const SetupSummaryPage: React.FC<SetupSummaryPageProps> = ({
 			console.log(error)
 		}
 
-		setIsSetupCompleted(true);
+		dispatch(setIsSetupCompleted(true))
 	}
 };
 

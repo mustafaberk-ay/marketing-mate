@@ -1,25 +1,23 @@
 import { Link } from 'react-router-dom';
-import LoginButton from '../components/LoginButton';
-import { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import LoginButton from '../components/LoginButton';
 import LogoutButton from '../components/LogoutButton';
 import RegisterButton from '../components/RegisterButton';
-
-interface WelcomePageProps {
-	isSetupCompleted: boolean;
-	token: string;
-	setToken: React.Dispatch<React.SetStateAction<string>>;
-	setUserId: React.Dispatch<React.SetStateAction<string>>;
-}
-
-const WelcomePage: React.FC<WelcomePageProps> = ({
-	isSetupCompleted,
-	token,
+import {
+	setIsUserInfoExists,
 	setToken,
-	setUserId
-}) => {
-	const { user, isAuthenticated, isLoading, getAccessTokenSilently } =
-		useAuth0();
+	setUserId,
+} from '../redux/slices/userInfoSlice';
+import { RootState } from '../redux/store';
+
+const WelcomePage: React.FC = () => {
+	const dispatch = useDispatch();
+	const userInfo = useSelector((state: RootState) => state.user);
+
+	const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
 
 	useEffect(() => {
 		const getToken = async () => {
@@ -30,35 +28,74 @@ const WelcomePage: React.FC<WelcomePageProps> = ({
 						scope: 'read:current_user',
 					},
 				});
-				setToken(accessToken);
+				dispatch(setToken(accessToken));
 			} catch (e) {
 				console.error(e);
 			}
 		};
 
+		const checkIsUserInfoExists = async () => {
+			try {
+				await fetch('http://localhost:3000/user-info/isUserInfoExists', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ id: userInfo.userId }),
+				})
+					.then((response) => {
+						if (!response.ok) {
+							throw new Error('Network response was not ok');
+						}
+						return response.json();
+					})
+					.then((data: boolean) => {
+						//maybe bc data is interpreted as a string
+						//so it doesn't setIsUserInfoExists to true or false
+						dispatch(setIsUserInfoExists(data));
+					})
+					.catch((error) => {
+						console.error(
+							'There was a problem with your fetch operation:',
+							error
+						);
+					});
+			} catch (error) {
+				console.error(error);
+			}
+		};
+
 		if (isAuthenticated && user?.sub) {
 			getToken();
-			setUserId(user.sub)
+			dispatch(setUserId(user.sub));
+			checkIsUserInfoExists();
 		}
-	}, [isAuthenticated, getAccessTokenSilently]);
+	}, [isAuthenticated, getAccessTokenSilently, userInfo.token]);
 
 	return (
 		<div>
-			{isSetupCompleted ? <h3>Setup Completed Already</h3> : ''}
+			{userInfo.isSetupCompleted ? <h3>Setup Completed Already</h3> : ''}
 			<button>
 				<Link to='/meta-setup-page'>Start Setup</Link>
 			</button>
 			<br />
 
-			{token !== '' ? (
+			{userInfo.token !== '' ? (
+				//if user is logged in
 				<div>
-					<button>
-						<Link to='/profile-page'>Your Profile</Link>
-					</button>
+					{userInfo.isUserInfoExists ? (
+						//if user completed profile setup
+						<button>
+							<Link to='/profile-page'>Your Profile</Link>
+						</button>
+					) : (
+						//if user is logged in but not complete
+						''
+					)}
+
 					<br />
 					<LogoutButton />
 				</div>
 			) : (
+				//if user is not logged in
 				<div>
 					<RegisterButton />
 					<LoginButton />

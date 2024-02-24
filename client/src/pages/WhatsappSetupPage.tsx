@@ -1,21 +1,19 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { RootState } from '../redux/store';
+import { setIsWhatsappSetupCompleted } from '../redux/slices/userInfoSlice';
 
-interface WhatsappSetupPageProps {
-	isWhatsappSetupCompleted: boolean;
-	setIsWhatsappSetupCompleted: React.Dispatch<React.SetStateAction<boolean>>;
-}
+const WhatsappSetupPage: React.FC = () => {
+	const dispatch = useDispatch()
+	const userInfo = useSelector((state: RootState) => state.user)
 
-const WhatsappSetupPage: React.FC<WhatsappSetupPageProps> = ({
-	isWhatsappSetupCompleted,
-	setIsWhatsappSetupCompleted,
-}) => {
 	const setupWhatsappButtonClicked = async () => {
 		const res = await fetch(
 			'http://localhost:3000/whatsappMessage/setupWhatsapp'
 		);
 
 		if (res.status === 200) {
-			setIsWhatsappSetupCompleted(true);
+			dispatch(setIsWhatsappSetupCompleted(true))
 		}
 
 	};
@@ -24,7 +22,7 @@ const WhatsappSetupPage: React.FC<WhatsappSetupPageProps> = ({
 		<div>
 			<h1>Step 3: Whatsapp Setup Page</h1>
 			<button onClick={setupWhatsappButtonClicked}>Setup Whatsapp</button>
-			{ isWhatsappSetupCompleted ?  <p>Whatsapp Setup Completed Successfully</p> : ''}
+			{ userInfo.isWhatsappSetupCompleted ?  <p>Whatsapp Setup Completed Successfully</p> : ''}
 			<br />
 			<Link to='/gmail-setup-page'>Previous</Link>
 			<Link to='/twilio-setup-page'>Next</Link>

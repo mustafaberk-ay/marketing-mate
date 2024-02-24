@@ -1,26 +1,24 @@
 import { useEffect } from 'react';
 import { FBAuthResponse } from '../type';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+import { setFacebookUserAccessToken } from '../redux/slices/userInfoSlice';
 
-interface MetaSetupPageProps {
-	facebookUserAccessToken: string;
-	setFacebookUserAccessToken: React.Dispatch<React.SetStateAction<string>>;
-}
+const MetaSetupPage: React.FC = () => {
+	const dispatch = useDispatch();
+	const userInfo = useSelector((state: RootState) => state.user);
 
-const MetaSetupPage: React.FC<MetaSetupPageProps> = ({
-	facebookUserAccessToken,
-	setFacebookUserAccessToken,
-}) => {
 	useEffect(() => {
 		window.FB.getLoginStatus((response: { authResponse?: FBAuthResponse }) => {
-			setFacebookUserAccessToken(response.authResponse?.accessToken || '');
+			dispatch(setFacebookUserAccessToken(response.authResponse?.accessToken || ''));
 		});
 	}, []);
 
 	const logInToFB = () => {
 		window.FB.login(
 			(response: { authResponse?: FBAuthResponse }) => {
-				setFacebookUserAccessToken(response.authResponse?.accessToken || '');
+				dispatch(setFacebookUserAccessToken(response.authResponse?.accessToken || ''));
 			},
 			{
 				scope:
@@ -33,7 +31,7 @@ const MetaSetupPage: React.FC<MetaSetupPageProps> = ({
 		<div>
 			<h1>Step 1: Facebook and Instagram Setup</h1>
 			<h3>Login with Facebook</h3>
-			{facebookUserAccessToken ? (
+			{userInfo.facebookUserAccessToken ? (
 				<p>Logged in with Facebook successfully</p>
 			) : (
 				<p>Not logged in with Facebook yet</p>

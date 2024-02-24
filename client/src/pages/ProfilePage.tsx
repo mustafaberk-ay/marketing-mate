@@ -3,14 +3,13 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserInfo } from '../type';
 import { decryptData } from '../utils/encryptionUtils';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
-interface ProfilePageProps {
-	token: string;
-	userId: string;
-}
+const ProfilePage: React.FC = () => {
+	const userInfo = useSelector((state: RootState) => state.user);
 
-const ProfilePage: React.FC<ProfilePageProps> = ({ token, userId }) => {
-	const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+	const [userInfoData, setUserInfoData] = useState<UserInfo | null>(null);
 	const { user, isAuthenticated, isLoading } = useAuth0();
 
 	useEffect(() => {
@@ -18,7 +17,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ token, userId }) => {
 			await fetch('http://localhost:3000/user-info/getUserInfoById', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ id: userId }),
+				body: JSON.stringify({ id: userInfo.userId }),
 			})
 				.then((response) => {
 					if (!response.ok) {
@@ -27,7 +26,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ token, userId }) => {
 					return response.json();
 				})
 				.then((data) => {
-					setUserInfo(data)
+					setUserInfoData(data);
 					console.log(data, 'data');
 				})
 				.catch((error) => {
@@ -39,7 +38,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ token, userId }) => {
 		}
 
 		getUserInfo();
-	});
+	}, [userInfo.userId]);
 
 	if (isLoading) {
 		return <div>Loading ...</div>;
@@ -50,13 +49,20 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ token, userId }) => {
 	// const uid = info?.at(1);
 
 	return (
-		userInfo && (
+		userInfoData && (
 			<div>
-				<p>ID: {userInfo._id}</p>
-				<p>Facebook Token: {userInfo.facebook_user_access_token}</p>
-				<p>Gmail Address: {userInfo.gmail_address}</p>
-				<p>Gmail App Password: {userInfo.gmail_app_password}</p>
-				<p>Assistant Phone Number: {decryptData(userInfo.assistant_phone_number) }</p>
+				<p>ID: {userInfoData._id}</p>
+				<p>
+					Facebook Token: {decryptData(userInfoData.facebook_user_access_token)}
+				</p>
+				<p>Gmail Address: {decryptData(userInfoData.gmail_address)}</p>
+				<p>
+					Gmail App Password: {decryptData(userInfoData.gmail_app_password)}
+				</p>
+				<p>
+					Assistant Phone Number:{' '}
+					{decryptData(userInfoData.assistant_phone_number)}
+				</p>
 				<Link to='/'>Go Back</Link>
 			</div>
 		)

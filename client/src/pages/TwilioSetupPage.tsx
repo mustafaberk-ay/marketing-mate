@@ -1,21 +1,19 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { RootState } from '../redux/store';
+import { setSalesPhoneNumber } from '../redux/slices/userInfoSlice';
 
-interface TwilioSetupPageProps {
-	salesPhoneNumber: string;
-	setSalesPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
-}
+const TwilioSetupPage: React.FC = () => {
+	const dispatch = useDispatch();
+	const userInfo = useSelector((state: RootState) => state.user);
 
-const TwilioSetupPage: React.FC<TwilioSetupPageProps> = ({
-	salesPhoneNumber,
-	setSalesPhoneNumber,
-}) => {
 	const [phoneNumberInput, setPhoneNumberInput] = useState<string>('');
 
 	return (
 		<div>
 			<h1>Step 4: Cold Call Setup Page</h1>
-			<h2>Saved Sales Assistant Phone Number: {salesPhoneNumber}</h2>
+			<h2>Saved Sales Assistant Phone Number: {userInfo.salesPhoneNumber}</h2>
 			<h3>Enter a phone number to redirect calls from interested customers</h3>
 			<input
 				onChange={phoneNumberOnChange}
@@ -36,7 +34,7 @@ const TwilioSetupPage: React.FC<TwilioSetupPageProps> = ({
 	}
 
 	function savePhoneNumberButtonOnClick() {
-		setSalesPhoneNumber(phoneNumberInput);
+		dispatch(setSalesPhoneNumber(phoneNumberInput));
 	}
 };
 

@@ -1,19 +1,14 @@
 import { Link } from 'react-router-dom';
 import { ChangeEvent, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-interface GmailSetupPageProps {
-	gmailAddress: string;
-	setGmailAddress: React.Dispatch<React.SetStateAction<string>>;
-	gmailAppPassword: string;
-	setGmailAppPassword: React.Dispatch<React.SetStateAction<string>>;
-}
+import { RootState } from '../redux/store';
+import { setGmailAddress, setGmailAppPassword } from '../redux/slices/userInfoSlice';
 
-const GmailSetupPage: React.FC<GmailSetupPageProps> = ({
-	gmailAddress,
-	setGmailAddress,
-	gmailAppPassword,
-	setGmailAppPassword,
-}) => {
+const GmailSetupPage: React.FC = () => {
+	const dispatch = useDispatch();
+	const userInfo = useSelector((state: RootState) => state.user);
+
 	const [isValidInputs, setIsValidInputs] = useState<boolean>(false);
 
 	const validateEmail = (email: string): boolean => {
@@ -30,14 +25,14 @@ const GmailSetupPage: React.FC<GmailSetupPageProps> = ({
 				onChange={gmailAddressInputOnChange}
 				type='email'
 				placeholder='Gmail Address'
-				value={gmailAddress}
+				value={userInfo.gmailAddress}
 			/>
 			<p>Enter Your Gmail App Password</p>
 			<input
 				onChange={gmailAppPasswordInputOnChange}
 				type='password'
 				placeholder='Gmail App Password'
-				value={gmailAppPassword}
+				value={userInfo.gmailAppPassword}
 			/>
 			<p>
 				<a href='https://support.google.com/mail/answer/185833?hl=en#:~:text=Go%20to%20your%20Google%20Account,the%20page%2C%20select%20App%20passwords.'>
@@ -61,8 +56,8 @@ const GmailSetupPage: React.FC<GmailSetupPageProps> = ({
 	);
 
 	function setupGmailButtonOnClick() {
-		const isValidEmail = validateEmail(gmailAddress);
-		if (isValidEmail || gmailAppPassword.length > 0) {
+		const isValidEmail = validateEmail(userInfo.gmailAddress);
+		if (isValidEmail || userInfo.gmailAppPassword.length > 0) {
 			setIsValidInputs(true);
 		} else {
 			setIsValidInputs(false);
@@ -70,11 +65,11 @@ const GmailSetupPage: React.FC<GmailSetupPageProps> = ({
 	}
 
 	function gmailAppPasswordInputOnChange(e: ChangeEvent<HTMLInputElement>) {
-		setGmailAppPassword(e.target.value);
+		dispatch(setGmailAppPassword(e.target.value));
 	}
 
 	function gmailAddressInputOnChange(e: ChangeEvent<HTMLInputElement>) {
-		setGmailAddress(e.target.value);
+		dispatch(setGmailAddress(e.target.value));
 	}
 };
 
