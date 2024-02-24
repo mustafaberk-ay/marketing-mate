@@ -29,3 +29,15 @@ export interface UserInfo {
 	gmail_app_password: string;
 	assistant_phone_number: string;
 }
+
+export interface UserInfoState {
+	facebookUserAccessToken: string;
+	gmailAddress: string;
+	gmailAppPassword: string;
+	isWhatsappSetupCompleted: boolean;
+	salesPhoneNumber: string;
+	isSetupCompleted: boolean;
+	token: string;
+	userId: string;
+	isUserInfoExists: boolean;
+}
