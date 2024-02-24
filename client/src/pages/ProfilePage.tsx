@@ -27,7 +27,6 @@ const ProfilePage: React.FC = () => {
 				})
 				.then((data) => {
 					setUserInfoData(data);
-					console.log(data, 'data');
 				})
 				.catch((error) => {
 					console.error(

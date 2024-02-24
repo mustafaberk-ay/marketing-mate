@@ -70,6 +70,8 @@ const WelcomePage: React.FC = () => {
 		}
 	}, [isAuthenticated, getAccessTokenSilently, userInfo.token]);
 
+	//console.log(userInfo.userId, 'uid');
+
 	return (
 		<div>
 			{userInfo.isSetupCompleted ? <h3>Setup Completed Already</h3> : ''}
