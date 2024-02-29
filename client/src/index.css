@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.rounded-15 {
+	border-radius: 15px;
+}
+
+.rounded-50 {
+	border-radius: 50px;
+}
