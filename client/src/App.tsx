@@ -7,15 +7,20 @@ import WhatsappSetupPage from './pages/WhatsappSetupPage';
 import TwilioSetupPage from './pages/TwilioSetupPage';
 import SetupSummaryPage from './pages/SetupSummaryPage';
 import ProfilePage from './pages/ProfilePage';
+import HomePage from './pages/HomePage';
 
 function App() {
 	return (
 		<>
-			<div>
+			<div className='bg-darkBlue fixed inset-0'>
 				<Routes>
 					<Route
 						path='/'
 						element={<WelcomePage />}
+					/>
+					<Route
+						path='/home-page'
+						element={<HomePage />}
 					/>
 					<Route
 						path='/meta-setup-page'

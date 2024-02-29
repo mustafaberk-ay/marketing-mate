@@ -74,7 +74,34 @@ const WelcomePage: React.FC = () => {
 
 	return (
 		<div>
-			{userInfo.isSetupCompleted ? <h3>Setup Completed Already</h3> : ''}
+			<div className='w-full bg-darkBrown h-16 rounded-15'>
+				<p className='text-center text-white font-extrabold text-9xl'>
+					Marketing Mate
+				</p>
+			</div>
+			<p className='text-center text-lightBrown text-4xl mt-32'>
+				Your AI-Based Marketing Assistant
+			</p>
+
+			{userInfo.token !== '' ? (
+				<div className='flex flex-col items-center mt-10 space-y-8'>
+					<button className='bg-lightBrown text-white py-2 px-4 rounded-50 w-56 h-20 text-3xl transition-transform hover:scale-110'>
+						<Link to='/home-page'>Get Started</Link>
+					</button>
+					<LogoutButton />
+				</div>
+			) : (
+				<div className='flex flex-col space-y-8 items-center mt-10'>
+					<LoginButton />
+					<RegisterButton />
+				</div>
+			)}
+
+			<p className='text-lightBrown text-center mt-10 text-3xl'>
+				Join us to unleash your product’s potential!
+			</p>
+
+			{/* {userInfo.isSetupCompleted ? <h3>Setup Completed Already</h3> : ''}
 			<button>
 				<Link to='/meta-setup-page'>Start Setup</Link>
 			</button>
@@ -102,7 +129,7 @@ const WelcomePage: React.FC = () => {
 					<RegisterButton />
 					<LoginButton />
 				</div>
-			)}
+			)} */}
 		</div>
 	);
 };

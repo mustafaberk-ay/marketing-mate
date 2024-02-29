@@ -6,6 +6,7 @@ import initFacebookSDK from './utils/initFacebookSDK.ts';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { store } from './redux/store.ts';
 import { Provider } from 'react-redux';
+import "./index.css"
 
 const renderApp = (): void => {
 	ReactDOM.createRoot(document.getElementById('root')!).render(
