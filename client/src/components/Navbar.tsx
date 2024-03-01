@@ -20,7 +20,7 @@ function Navbar() {
 						Home
 					</Link>
 					<Link
-						to='/home-page'
+						to='/social-media-marketing-1'
 						className='text-white hover:text-gray-300 px-3'
 					>
 						Social Media Marketing
