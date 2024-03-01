@@ -8,6 +8,10 @@ import TwilioSetupPage from './pages/TwilioSetupPage';
 import SetupSummaryPage from './pages/SetupSummaryPage';
 import ProfilePage from './pages/ProfilePage';
 import HomePage from './pages/HomePage';
+import SocialMediaMarketingPage1 from './pages/socialMediaMarketing/SocialMediaMarketing1';
+import SocialMediaMarketingPage2 from './pages/socialMediaMarketing/SocialMediaMarketing2';
+import SocialMediaMarketingPage3 from './pages/socialMediaMarketing/SocialMediaMarketing3';
+import SocialMediaMarketing4 from './pages/socialMediaMarketing/SocialMediaMarketing4';
 
 function App() {
 	return (
@@ -22,6 +26,23 @@ function App() {
 						path='/home-page'
 						element={<HomePage />}
 					/>
+					<Route
+						path='/social-media-marketing-1'
+						element={<SocialMediaMarketingPage1 />}
+					/>
+					<Route
+						path='/social-media-marketing-2'
+						element={<SocialMediaMarketingPage2 />}
+					/>
+					<Route
+						path='/social-media-marketing-3'
+						element={<SocialMediaMarketingPage3 />}
+					/>
+					<Route
+						path='/social-media-marketing-4'
+						element={<SocialMediaMarketing4 />}
+					/>
+
 					<Route
 						path='/meta-setup-page'
 						element={<MetaSetupPage />}
