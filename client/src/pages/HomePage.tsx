@@ -36,14 +36,14 @@ function HomePage() {
 						<div className='flex flex-col items-center mt-10 space-y-8'>
 							<Link
 								className='text-center bg-darkBrown text-white py-2 px-4 rounded-50 w-96 h-24 text-3xl transition-transform hover:scale-110'
-								to='/'
+								to='/email-marketing-1'
 							>
 								Email <br />
 								Marketing
 							</Link>
 							<Link
 								className='text-center bg-darkBrown text-white py-2 px-4 rounded-50 w-96 h-24 text-3xl transition-transform hover:scale-110'
-								to='/'
+								to='/cold-calling-1'
 							>
 								Cold <br />
 								Calling
