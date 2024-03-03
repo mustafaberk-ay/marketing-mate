@@ -1,0 +1,69 @@
+import { useAuth0 } from '@auth0/auth0-react';
+import Navbar from '../../components/Navbar';
+import NotLoggedIn from '../../components/NotLoggedIn';
+import PrevStepButton from '../../components/PrevStepButton';
+import NextStepButton from '../../components/NextStepButton';
+import generateImage from '/generate.png';
+
+function EmailMarketingPage2() {
+	const { isAuthenticated } = useAuth0();
+
+	function generateButtonOnClick() {
+		console.log('generate button clicked');
+	}
+
+	return (
+		<div>
+			{isAuthenticated ? (
+				<div>
+					<Navbar />
+
+					<div className='flex flex-col space-y-4 pl-10 pr-10 pt-2'>
+						<div className='font-semibold text-white text-center text-5xl'>
+							Email Marketing
+						</div>
+
+						<div className='text-white text-3xl '>
+							Step 2: Email Generation
+						</div>
+
+						<div className='flex space-x-8'>
+							<label className='text-white text-5xl font-extrabold mr-2'>
+								Generated Email:
+							</label>
+							<textarea
+								className='border-4 border-darkBrown h-64 rounded-md focus:outline-none focus:border-lightBrown w-3/5 text-2xl bg-darkBlue text-white mb-10'
+								wrap='soft'
+								defaultValue='Waiting for the generated content'
+							></textarea>
+						</div>
+
+						<div className='text-lightBrown text-center text-2xl'>
+							If you don’t like this email, click “Generate Again” or edit the
+							text above. Otherwise, continue with the “Next Step”.
+						</div>
+
+						<div className='flex justify-between pt-11'>
+							<PrevStepButton prevStepPath='/email-marketing-1' />
+							<button
+								onClick={generateButtonOnClick}
+								className='flex items-center justify-around bg-lightBrown text-white py-5 rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'
+							>
+								<img
+									className='h-8'
+									src={generateImage}
+								/>
+								Generate Again
+							</button>
+							<NextStepButton nextStepPath='/email-marketing-3' />
+						</div>
+					</div>
+				</div>
+			) : (
+				<NotLoggedIn />
+			)}
+		</div>
+	);
+}
+
+export default EmailMarketingPage2;
