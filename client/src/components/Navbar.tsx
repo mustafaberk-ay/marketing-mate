@@ -32,13 +32,13 @@ function Navbar() {
 						Message Marketing
 					</Link>
 					<Link
-						to='/home-page'
+						to='/email-marketing-1'
 						className='text-white hover:text-gray-300 px-3'
 					>
 						Email Marketing
 					</Link>
 					<Link
-						to='/home-page'
+						to='/cold-calling-1'
 						className='text-white hover:text-gray-300 px-3'
 					>
 						Cold Calling
