@@ -16,6 +16,10 @@ import MessageMarketingPage1 from './pages/messageMarketing/MessageMarketingPage
 import MessageMarketingPage2 from './pages/messageMarketing/MessageMarketingPage2';
 import MessageMarketingPage3 from './pages/messageMarketing/MessageMarketingPage3';
 import MessageMarketingPage4 from './pages/messageMarketing/MessageMarketingPage4';
+import EmailMarketingPage1 from './pages/emailMarketingPages/EmailMarketingPage1';
+import EmailMarketingPage2 from './pages/emailMarketingPages/EmailMarketingPage2';
+import EmailMarketingPage3 from './pages/emailMarketingPages/EmailMarketingPage3';
+import EmailMarketingPage4 from './pages/emailMarketingPages/EmailMarketingPage4';
 
 function App() {
 	return (
@@ -63,6 +67,23 @@ function App() {
 					<Route
 						path='/message-marketing-4'
 						element={<MessageMarketingPage4 />}
+					/>
+
+<Route
+						path='/email-marketing-1'
+						element={<EmailMarketingPage1 />}
+					/>
+					<Route
+						path='/email-marketing-2'
+						element={<EmailMarketingPage2 />}
+					/>
+					<Route
+						path='/email-marketing-3'
+						element={<EmailMarketingPage3 />}
+					/>
+					<Route
+						path='/email-marketing-4'
+						element={<EmailMarketingPage4 />}
 					/>
 
 					<Route
