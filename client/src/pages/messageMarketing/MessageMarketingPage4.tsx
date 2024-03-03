@@ -27,7 +27,7 @@ function MessageMarketingPage4() {
 							Message Marketing
 						</div>
 
-						<div className='text-white text-3xl '>Step 3: Send Message</div>
+						<div className='text-white text-3xl '>Step 4: Send Message</div>
 
 						<div className='text-lightBrown text-center text-2xl pt-10'>
 							Enter the name of the contact, you would like to send your
