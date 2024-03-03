@@ -31,7 +31,7 @@ function SocialMediaMarketingPage2() {
 								Generated Content:
 							</label>
 							<textarea
-								className='border-4 border-darkBlue h-64 rounded-md focus:outline-none focus:border-lightBrown w-3/5 text-2xl bg-darkBlue text-white mb-10'
+								className='border-4 border-darkBrown h-64 rounded-md focus:outline-none focus:border-lightBrown w-3/5 text-2xl bg-darkBlue text-white mb-10'
 								wrap='soft'
 								defaultValue='Waiting for the generated content'
 							></textarea>
