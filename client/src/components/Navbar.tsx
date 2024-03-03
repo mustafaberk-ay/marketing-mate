@@ -26,7 +26,7 @@ function Navbar() {
 						Social Media Marketing
 					</Link>
 					<Link
-						to='/home-page'
+						to='/message-marketing-1'
 						className='text-white hover:text-gray-300 px-3'
 					>
 						Message Marketing
