@@ -20,6 +20,9 @@ import EmailMarketingPage1 from './pages/emailMarketingPages/EmailMarketingPage1
 import EmailMarketingPage2 from './pages/emailMarketingPages/EmailMarketingPage2';
 import EmailMarketingPage3 from './pages/emailMarketingPages/EmailMarketingPage3';
 import EmailMarketingPage4 from './pages/emailMarketingPages/EmailMarketingPage4';
+import ColdCallingPage1 from './pages/coldCallingPages/ColdCallingPage1';
+import ColdCallingPage2 from './pages/coldCallingPages/ColdCallingPage2';
+import ColdCallingPage3 from './pages/coldCallingPages/ColdCallingPage3';
 
 function App() {
 	return (
@@ -69,7 +72,7 @@ function App() {
 						element={<MessageMarketingPage4 />}
 					/>
 
-<Route
+					<Route
 						path='/email-marketing-1'
 						element={<EmailMarketingPage1 />}
 					/>
@@ -84,6 +87,19 @@ function App() {
 					<Route
 						path='/email-marketing-4'
 						element={<EmailMarketingPage4 />}
+					/>
+
+					<Route
+						path='/cold-calling-1'
+						element={<ColdCallingPage1 />}
+					/>
+					<Route
+						path='/cold-calling-2'
+						element={<ColdCallingPage2 />}
+					/>
+					<Route
+						path='/cold-calling-3'
+						element={<ColdCallingPage3 />}
 					/>
 
 					<Route
