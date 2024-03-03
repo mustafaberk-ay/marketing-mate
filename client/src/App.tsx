@@ -12,6 +12,9 @@ import SocialMediaMarketingPage1 from './pages/socialMediaMarketing/SocialMediaM
 import SocialMediaMarketingPage2 from './pages/socialMediaMarketing/SocialMediaMarketing2';
 import SocialMediaMarketingPage3 from './pages/socialMediaMarketing/SocialMediaMarketing3';
 import SocialMediaMarketing4 from './pages/socialMediaMarketing/SocialMediaMarketing4';
+import MessageMarketingPage1 from './pages/messageMarketing/MessageMarketingPage1';
+import MessageMarketingPage2 from './pages/messageMarketing/MessageMarketingPage2';
+import MessageMarketingPage3 from './pages/messageMarketing/MessageMarketingPage3';
 
 function App() {
 	return (
@@ -26,6 +29,7 @@ function App() {
 						path='/home-page'
 						element={<HomePage />}
 					/>
+
 					<Route
 						path='/social-media-marketing-1'
 						element={<SocialMediaMarketingPage1 />}
@@ -41,6 +45,19 @@ function App() {
 					<Route
 						path='/social-media-marketing-4'
 						element={<SocialMediaMarketing4 />}
+					/>
+
+					<Route
+						path='/message-marketing-1'
+						element={<MessageMarketingPage1 />}
+					/>
+					<Route
+						path='/message-marketing-2'
+						element={<MessageMarketingPage2 />}
+					/>
+					<Route
+						path='/message-marketing-3'
+						element={<MessageMarketingPage3 />}
 					/>
 
 					<Route
