@@ -15,6 +15,7 @@ import SocialMediaMarketing4 from './pages/socialMediaMarketing/SocialMediaMarke
 import MessageMarketingPage1 from './pages/messageMarketing/MessageMarketingPage1';
 import MessageMarketingPage2 from './pages/messageMarketing/MessageMarketingPage2';
 import MessageMarketingPage3 from './pages/messageMarketing/MessageMarketingPage3';
+import MessageMarketingPage4 from './pages/messageMarketing/MessageMarketingPage4';
 
 function App() {
 	return (
@@ -58,6 +59,10 @@ function App() {
 					<Route
 						path='/message-marketing-3'
 						element={<MessageMarketingPage3 />}
+					/>
+					<Route
+						path='/message-marketing-4'
+						element={<MessageMarketingPage4 />}
 					/>
 
 					<Route
