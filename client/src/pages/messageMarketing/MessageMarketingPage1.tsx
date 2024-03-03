@@ -61,6 +61,16 @@ function MessageMarketingPage1() {
 							></textarea>
 						</div>
 
+						<div className='flex space-x-8'>
+							<label className='text-white text-3xl'>
+								Would you like an AI-generated image?
+							</label>
+							<input
+								type='checkbox'
+								className='form-checkbox h-6 w-6 mt-2 '
+							/>
+						</div>
+
 						<div className='flex justify-between'>
 							<GoHomePageButton />
 							<NextStepButton nextStepPath='/message-marketing-2' />
