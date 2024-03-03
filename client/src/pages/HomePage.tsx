@@ -27,7 +27,7 @@ function HomePage() {
 
 							<Link
 								className='text-center bg-darkBrown text-white py-2 px-4 rounded-50 w-96 h-24 text-3xl transition-transform hover:scale-110'
-								to='/'
+								to='/message-marketing-1'
 							>
 								Message <br />
 								Marketing
