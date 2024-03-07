@@ -11,11 +11,11 @@ import {
 import chrome from 'selenium-webdriver/chrome';
 
 export async function setupWhatsappService() {
-	const options = new chrome.Options();
+	const options = new chrome.Options().setChromeBinaryPath('.\\chrome\\App\\Chrome-bin\\chrome.exe');
 	options.addArguments(
-		'user-data-dir=C:\\Users\\Mustafa\\AppData\\Local\\Google\\Chrome\\User Data'
+		'user-data-dir=C:\\marketingmate\\profiles'
 	);
-	options.addArguments('profile-directory=marketingmate');
+	options.addArguments('profile-directory=profile1');
 	options.addArguments('--start-fullscreen');
 	options.addArguments('--disable-gpu');
 	options.addArguments('--no-sandbox');
@@ -45,11 +45,12 @@ export async function sendWhatsappMessageService(
 	contactName: string,
 	messageContent: string
 ) {
-	var options = new chrome.Options();
+	const options = new chrome.Options().setChromeBinaryPath('.\\chrome\\App\\Chrome-bin\\chrome.exe');
+
 	options.addArguments(
-		'user-data-dir=C:\\Users\\Mustafa\\AppData\\Local\\Google\\Chrome\\User Data'
+		'user-data-dir=C:\\marketingmate\\profiles'
 	);
-	options.addArguments('profile-directory=marketingmate');
+	options.addArguments('profile-directory=profile1');
 	options.addArguments('--start-fullscreen');
 	options.addArguments('--disable-gpu');
 	options.addArguments('--no-sandbox');
@@ -60,57 +61,68 @@ export async function sendWhatsappMessageService(
 	options.addArguments('--disable-popup-blocking');
 	options.addArguments('--disable-web-security');
 
-	const driver = new Builder()
+	const driver: WebDriver = await new Builder()
 		.forBrowser(Browser.CHROME)
 		.setChromeOptions(options)
 		.build();
 
-	await driver.get('https://web.whatsapp.com/');
-	await driver.wait(
-		until.elementLocated(By.css("[title='Search input textbox']"))
-	);
+		await driver.get('https://web.whatsapp.com/');
+		await driver.wait(
+			until.elementLocated(By.css("[title='Search input textbox']"))
+		);
 
-	const sentStatusSelector = 'span[data-icon="msg-check"]';
+		const sentStatusSelector = 'span[data-icon="msg-check"]';
 
-	const searchInput = await driver.findElement(
-		By.css("[title='Search input textbox']")
-	);
-	await searchInput.sendKeys(contactName);
+		const searchInput = await driver.findElement(
+			By.css("[title='Search input textbox']")
+		);
+		await searchInput.sendKeys(contactName);
 
-	await driver.wait(
-		until.elementLocated(By.xpath(`//span[@title='${contactName}']`))
-	);
+		await driver.wait(
+			until.elementLocated(By.xpath(`//span[@title='${contactName}']`))
+		);
 
-	//await driver.sleep(1000)
+		//await driver.sleep(1000)
 
-	const contact = await driver.findElement(
-		By.xpath(`//span[@title='${contactName}']`)
-	);
-	await contact.click();
+		const contact = await driver.findElement(
+			By.xpath(`//span[@title='${contactName}']`)
+		);
+		await driver.wait(
+			until.elementLocated(By.xpath(`//span[@title='${contactName}']`))
+		);
+		await driver.executeScript('arguments[0].scrollIntoView(true);', contact);
+		await driver.wait(async function () {
+			const isEnabled = await contact.isEnabled();
+			const isDisplayed = await contact.isDisplayed();
+			return isEnabled && isDisplayed;
+		});
+		await contact.click();
+		await driver.wait(until.elementLocated(By.css("[title='Type a message']")));
 
-	await driver.wait(until.elementLocated(By.css("[title='Type a message']")));
+		const messageInput = await driver.findElement(
+			By.css("[title='Type a message']")
+		);
 
-	const messageInput = await driver.findElement(
-		By.css("[title='Type a message']")
-	);
+		await messageInput.sendKeys(messageContent, Key.RETURN);
 
-	await messageInput.sendKeys(messageContent, Key.RETURN);
-
-	const initialSentMessageCount = await (
-		await driver.findElements(By.css(sentStatusSelector))
-	).length;
-
-	let finalSentMessageCount = await (
-		await driver.findElements(By.css(sentStatusSelector))
-	).length;
-
-	while (finalSentMessageCount == initialSentMessageCount) {
-		await driver.sleep(100);
-		finalSentMessageCount = await (
+		const initialSentMessageCount = await (
 			await driver.findElements(By.css(sentStatusSelector))
 		).length;
-	}
+		//console.log(initialSentMessageCount, 'initialSentMessageCount');
 
-	await driver.quit();
+		let finalSentMessageCount = await (
+			await driver.findElements(By.css(sentStatusSelector))
+		).length;
+
+		while (finalSentMessageCount == initialSentMessageCount) {
+			await driver.sleep(100);
+			finalSentMessageCount = await (
+				await driver.findElements(By.css(sentStatusSelector))
+			).length;
+		}
+
+		//console.log(finalSentMessageCount, 'finalSentMessageCount')
+
+		await driver.quit();
 	return 'Whatsapp Message Sent Successfully';
 }
