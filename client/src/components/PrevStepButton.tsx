@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import prevImage from '/public/prev.png';
+import prevImage from '/prev.png';
 
 interface PrevStepButtonProps {
 	prevStepPath: string;
