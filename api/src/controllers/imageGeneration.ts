@@ -4,9 +4,9 @@ import { createImageVariationService, editImageService, generateImageService } f
 export const generateImage = async (req: Request, res: Response) => {
     try {
         const prompt = req.body.prompt;
-        const n = req.body.n;
+        const style = req.body.style;
 
-        const response = await generateImageService(prompt, n);
+        const response = await generateImageService(prompt, style);
         res.json(response);
     } catch (error) {
         res.json(error);
