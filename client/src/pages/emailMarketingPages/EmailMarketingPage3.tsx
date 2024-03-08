@@ -20,11 +20,51 @@ function EmailMarketingPage3() {
 					<Navbar />
 
 					<div className='flex flex-col space-y-4 pl-10 pr-10 pt-2'>
-						<div className='font-semibold text-white text-center text-5xl'>
-							Email Marketing
+						<div className='flex justify-between'>
+							<div className='text-white text-3xl mt-2'>
+								Step 3: Image Generation
+							</div>
+							<div className='font-semibold mr-80 text-white text-center text-5xl'>
+								Email Marketing
+							</div>
+							<div></div>
 						</div>
 
-						<div className='text-white text-3xl '>Step 3: Image Generation</div>
+						<div className='text-lightBrown text-center text-2xl'>
+							It is <b className='underline italic'>optional</b> but effective
+							to input the image details you would like.
+						</div>
+
+						<div className='flex justify-around'>
+							<label className='text-white text-5xl font-bold'>
+								Image Details:
+							</label>
+							<textarea
+								className='border-4 bg-darkBlue text-white border-darkBrown rounded-md focus:outline-none focus:border-lightBrown w-3/5 px-2 text-2xl'
+								wrap='soft'
+							></textarea>
+							<div className='flex items-center space-x-8 bg-lightBrown p-5 rounded-50'>
+								<div className='space-x-2'>
+									<input
+										type='radio'
+										defaultChecked
+										name='style'
+										className='form-radio h-5 w-5'
+									/>
+									<label className='text-white'>Vivid</label>
+								</div>
+
+								<div className='space-x-2'>
+									<input
+										type='radio'
+										name='style'
+										className='form-radio h-5 w-5'
+									/>
+									<label className='text-white'>Natural</label>
+								</div>
+							</div>
+						</div>
+
 						<div className='flex justify-center'>
 							<img
 								className='h-80'
@@ -33,8 +73,8 @@ function EmailMarketingPage3() {
 						</div>
 
 						<div className='text-lightBrown text-center text-2xl'>
-							If you don’t like this image, click “Generate Again”. Otherwise,
-							continue with the “Next Step”.
+							If you are pleased with the current generated image, click on
+							"Next Step".
 						</div>
 
 						<div className='flex justify-between pt-5'>
@@ -47,7 +87,7 @@ function EmailMarketingPage3() {
 									className='h-8'
 									src={generateImage}
 								/>
-								Generate Again
+								Generate Image
 							</button>
 							<NextStepButton nextStepPath='/email-marketing-4' />
 						</div>
