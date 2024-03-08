@@ -12,7 +12,7 @@ const openai = new OpenAI({
 })
 
 export async function retrieveMarketingMateAssistantService(): Promise<string> {
-	globalAssistant =  await openai.beta.assistants.retrieve('asst_ctG2OPs5N6oLzhwVjRwilmlj');
+	globalAssistant =  await openai.beta.assistants.retrieve('asst_T6uOXhzTSTEITokDNUQ3Q1Sn');
 	if(globalAssistant){
 		return `SUCCESS: assistant ${globalAssistant.name} is retrieved succesfully.`;
 	}
