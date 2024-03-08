@@ -42,6 +42,7 @@ function SocialMediaMarketingPage3() {
 							<textarea
 								className='border-4 bg-darkBlue text-white border-darkBrown rounded-md focus:outline-none focus:border-lightBrown w-3/5 px-2 text-2xl'
 								wrap='soft'
+								placeholder='Enter details to guide the creation of an image.'
 							></textarea>
 							<div className='flex items-center space-x-8 bg-lightBrown p-5 rounded-50'>
 								<div className='space-x-2'>
