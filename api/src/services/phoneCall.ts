@@ -11,18 +11,22 @@ const client = new Twilio(
 export async function createCallService(
 	productName: string,
 	productScript: string,
-	phoneNumber: string
+	clientPhoneNumber: string,
+	assistantPhoneNumber: string
 ) {
 	const { VoiceResponse } = require('twilio').twiml;
 
 	const response = new VoiceResponse();
 	response.say(`I have a ${productName} that I want to tell you about!`);
 	productScript = encodeURIComponent(productScript);
+	assistantPhoneNumber = encodeURIComponent(assistantPhoneNumber);
+
+	const actionUri = `https://processresponse-8078.twil.io/processResponse?productScript=${productScript}&assistantPhoneNumber=${assistantPhoneNumber}`;
 
 	const gather = response.gather({
 		input: 'speech',
 		timeout: 3,
-		action: `https://processresponse-8078.twil.io/processResponse?productScript=${productScript}`,
+		action: actionUri,
 		method: 'POST',
 	});
 	gather.say(
@@ -35,7 +39,7 @@ export async function createCallService(
 	return client.calls
 		.create({
 			twiml: response.toString(),
-			to: phoneNumber,
+			to: clientPhoneNumber,
 			from: '+19706446356', // This should be a Twilio number you own.
 		})
 		.then((call) => call.sid)
