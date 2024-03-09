@@ -3,11 +3,12 @@ import { createCallService } from '../services/phoneCall';
 
 export const createCall = async (req: Request, res: Response) => {
 	try {
-		const { productName, productScript, phoneNumber } = req.body;
+		const { productName, productScript, clientPhoneNumber, assistantPhoneNumber } = req.body;
 		const response = await createCallService(
 			productName,
 			productScript,
-			phoneNumber
+			clientPhoneNumber,
+			assistantPhoneNumber
 		);
 		res.json(`call sid: ${response}`);
 	} catch (error) {
