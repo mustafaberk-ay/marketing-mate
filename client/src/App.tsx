@@ -1,12 +1,12 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import WelcomePage from './pages/WelcomePage';
-import MetaSetupPage from './pages/MetaSetupPage';
-import GmailSetupPage from './pages/GmailSetupPage';
-import WhatsappSetupPage from './pages/WhatsappSetupPage';
-import TwilioSetupPage from './pages/TwilioSetupPage';
-import SetupSummaryPage from './pages/SetupSummaryPage';
-import ProfilePage from './pages/ProfilePage';
+import MetaSetupPage from './tempPages/MetaSetupPage';
+import GmailSetupPage from './tempPages/GmailSetupPage';
+import WhatsappSetupPage from './tempPages/WhatsappSetupPage';
+import TwilioSetupPage from './tempPages/TwilioSetupPage';
+import SetupSummaryPage from './tempPages/SetupSummaryPage';
+import ProfilePage from './tempPages/ProfilePage';
 import HomePage from './pages/HomePage';
 import SocialMediaMarketingPage1 from './pages/socialMediaMarketing/SocialMediaMarketing1';
 import SocialMediaMarketingPage2 from './pages/socialMediaMarketing/SocialMediaMarketing2';
