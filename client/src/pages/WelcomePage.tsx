@@ -34,39 +34,9 @@ const WelcomePage: React.FC = () => {
 			}
 		};
 
-		const checkIsUserInfoExists = async () => {
-			try {
-				await fetch('http://localhost:3000/user-info/isUserInfoExists', {
-					method: 'POST',
-					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify({ id: userInfo.userId }),
-				})
-					.then((response) => {
-						if (!response.ok) {
-							throw new Error('Network response was not ok');
-						}
-						return response.json();
-					})
-					.then((data: boolean) => {
-						//maybe bc data is interpreted as a string
-						//so it doesn't setIsUserInfoExists to true or false
-						dispatch(setIsUserInfoExists(data));
-					})
-					.catch((error) => {
-						console.error(
-							'There was a problem with your fetch operation:',
-							error
-						);
-					});
-			} catch (error) {
-				console.error(error);
-			}
-		};
-
 		if (isAuthenticated && user?.sub) {
 			getToken();
 			dispatch(setUserId(user.sub));
-			checkIsUserInfoExists();
 		}
 	}, [isAuthenticated, getAccessTokenSilently, userInfo.token]);
 
