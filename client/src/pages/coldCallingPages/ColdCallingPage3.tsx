@@ -9,7 +9,8 @@ import { RootState } from '../../redux/store';
 import { useState } from 'react';
 
 interface PostData {
-	phoneNumber: string;
+	clientPhoneNumber: string;
+	assistantPhoneNumber: string;
 	productName: string;
 	productScript: string;
 }
@@ -33,7 +34,8 @@ function ColdCallingPage3() {
 		console.log('makeCallButtonOnClick');
 
 		const postData: PostData = {
-			phoneNumber: clientPhoneNumber,
+			clientPhoneNumber: clientPhoneNumber,
+			assistantPhoneNumber: salesAssistantPhoneNumber,
 			productName: productInfo.productName,
 			productScript: productInfo.generatedContent,
 		};
