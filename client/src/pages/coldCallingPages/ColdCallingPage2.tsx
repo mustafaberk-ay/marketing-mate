@@ -17,7 +17,7 @@ function ColdCallingPage2() {
 			{isAuthenticated ? (
 				<div>
 					<Navbar />
-					<div className='flex flex-col space-y-4 pl-10 pr-10 pt-2'>
+					<div className='flex flex-col justify-around h-screen pl-10 pr-10'>
 						<div className='font-semibold text-white text-center text-5xl'>
 							Cold Calling
 						</div>
@@ -46,7 +46,7 @@ function ColdCallingPage2() {
 							<PrevStepButton prevStepPath='/cold-calling-1' />
 							<button
 								onClick={generateButtonOnClick}
-								className='flex items-center justify-around bg-lightBrown text-white py-5 rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'
+								className='flex items-center justify-around bg-lightBrown text-white rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'
 							>
 								<img
 									className='h-8'
@@ -56,6 +56,7 @@ function ColdCallingPage2() {
 							</button>
 							<NextStepButton nextStepPath='/cold-calling-3' />
 						</div>
+						<div></div>
 					</div>
 				</div>
 			) : (

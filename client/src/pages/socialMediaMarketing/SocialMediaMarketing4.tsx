@@ -36,38 +36,38 @@ function SocialMediaMarketing4() {
 			{isAuthenticated ? (
 				<div>
 					<Navbar />
-					<div className='flex flex-col space-y-4 pl-10 pr-10 pt-2'>
+					<div className='flex flex-col justify-around h-screen pl-10 pr-10'>
 						<div className='font-semibold text-white text-center text-5xl'>
 							Social Media Marketing
 						</div>
 
 						<div className='text-white text-3xl '>Step 4: Share Post</div>
-						<div className='text-white text-2xl ml-80 pt-10'>Platforms</div>
+						<div className='text-white text-2xl '>Platforms</div>
 
 						<div className='flex space-x-28 justify-center'>
-							<div className=' flex justify-around items-center bg-darkBrown text-white py-5 rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110 space-x-4'>
+							<div className=' flex justify-around items-center bg-darkBrown text-white rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110 space-x-4'>
 								<label className='text-white text-3xl'>Facebook</label>
 								<input
 									type='checkbox'
-									className='form-checkbox h-6 w-6 mt-2 '
+									className='form-checkbox h-6 w-6'
 								/>
 							</div>
-							<div className='flex justify-around items-center bg-darkBrown text-white py-5 rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'>
+							<div className='flex justify-around items-center bg-darkBrown text-white rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'>
 								<label className='text-white text-3xl'>Instagram</label>
 								<input
 									type='checkbox'
-									className='form-checkbox h-6 w-6 mt-2 '
+									className='form-checkbox h-6 w-6'
 								/>
 							</div>
 						</div>
 
-						<div className='text-lightBrown text-center text-2xl pt-10'>
+						<div className='text-lightBrown text-center text-2xl'>
 							You need to login to Facebook first to share a post.
 						</div>
 
 						<div className='flex justify-center space-x-28'>
 							<button
-								className='flex justify-around items-center bg-darkBrown text-white py-5 rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'
+								className='flex justify-around items-center bg-darkBrown text-white rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'
 								onClick={logInToFB}
 							>
 								<img
@@ -77,7 +77,7 @@ function SocialMediaMarketing4() {
 								Login to <br /> Facebook
 							</button>
 							<button
-								className='flex justify-around items-center bg-darkBrown text-white py-5 rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'
+								className='flex justify-around items-center bg-darkBrown text-white rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'
 								onClick={sharePostButtonOnClick}
 							>
 								<img
@@ -88,10 +88,11 @@ function SocialMediaMarketing4() {
 							</button>
 						</div>
 
-						<div className='flex justify-between pt-9'>
+						<div className='flex justify-between'>
 							<PrevStepButton prevStepPath='/social-media-marketing-3' />
 							<CompleteButton />
 						</div>
+						<div></div>
 					</div>
 				</div>
 			) : (

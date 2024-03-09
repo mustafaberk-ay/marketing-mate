@@ -22,14 +22,14 @@ function MessageMarketingPage4() {
 			{isAuthenticated ? (
 				<div>
 					<Navbar />
-					<div className='flex flex-col space-y-4 pl-10 pr-10 pt-2'>
+					<div className='flex flex-col justify-around h-screen pl-10 pr-10'>
 						<div className='font-semibold text-white text-center text-5xl'>
 							Message Marketing
 						</div>
 
 						<div className='text-white text-3xl '>Step 4: Send Message</div>
 
-						<div className='text-lightBrown text-center text-2xl pt-10'>
+						<div className='text-lightBrown text-center text-2xl'>
 							Enter the name of the contact, you would like to send your
 							marketing message.
 						</div>
@@ -44,13 +44,13 @@ function MessageMarketingPage4() {
 							></textarea>
 						</div>
 
-						<div className='text-lightBrown text-center text-2xl pt-10'>
+						<div className='text-lightBrown text-center text-2xl'>
 							You need to setup WhatsApp before sending a message
 						</div>
 
 						<div className='flex justify-center space-x-28'>
 							<button
-								className='flex justify-around items-center bg-darkBrown text-white py-5 rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'
+								className='flex justify-around items-center bg-darkBrown text-white rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'
 								onClick={setupWhatsappButtonOnClick}
 							>
 								<img
@@ -60,7 +60,7 @@ function MessageMarketingPage4() {
 								Setup WhatsApp
 							</button>
 							<button
-								className='flex justify-around items-center bg-darkBrown text-white py-5 rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'
+								className='flex justify-around items-center bg-darkBrown text-white rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'
 								onClick={sendMessageButtonOnClick}
 							>
 								<img
@@ -70,10 +70,11 @@ function MessageMarketingPage4() {
 								Send Message
 							</button>
 						</div>
-						<div className='flex justify-between pt-9'>
+						<div className='flex justify-between'>
 							<PrevStepButton prevStepPath='/message-marketing-3' />
 							<CompleteButton />
 						</div>
+						<div></div>
 					</div>
 				</div>
 			) : (

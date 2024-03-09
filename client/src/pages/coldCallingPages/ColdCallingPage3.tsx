@@ -17,14 +17,14 @@ function ColdCallingPage3() {
 			{isAuthenticated ? (
 				<div>
 					<Navbar />
-					<div className='flex flex-col space-y-4 pl-10 pr-10 pt-2'>
+					<div className='flex flex-col justify-around h-screen pl-10 pr-10'>
 						<div className='font-semibold text-white text-center text-5xl'>
 							Cold Calling
 						</div>
 
 						<div className='text-white text-3xl '>Step 3: Make a Call</div>
 
-						<div className='text-lightBrown text-center text-2xl pt-10'>
+						<div className='text-lightBrown text-center text-2xl'>
 							Enter your sales assistant’s phone number. <br/> The potential client
 							will be redirected to that phone number.
 						</div>
@@ -39,7 +39,7 @@ function ColdCallingPage3() {
 							/>
 						</div>
 
-						<div className='text-lightBrown text-center text-2xl pt-10'>
+						<div className='text-lightBrown text-center text-2xl'>
 							Enter your client’s phone number.
 						</div>
 
@@ -53,10 +53,10 @@ function ColdCallingPage3() {
 							/>
 						</div>
 
-						<div className='flex justify-between pt-10'>
+						<div className='flex justify-between'>
 							<PrevStepButton prevStepPath='/cold-calling-2' />
 							<button
-								className='flex justify-around items-center bg-lightBrown text-white py-5 rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'
+								className='flex justify-around items-center bg-lightBrown text-white rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'
 								onClick={makeCallButtonOnClick}
 							>
 								<img
@@ -67,6 +67,7 @@ function ColdCallingPage3() {
 							</button>
 							<CompleteButton />
 						</div>
+						<div></div>
 					</div>
 				</div>
 			) : (

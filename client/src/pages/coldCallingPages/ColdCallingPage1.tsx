@@ -12,7 +12,7 @@ function ColdCallingPage1() {
 			{isAuthenticated ? (
 				<div>
 					<Navbar />
-					<div className='flex flex-col space-y-4 pl-10 pr-10 pt-2'>
+					<div className='flex flex-col justify-around h-screen pl-10 pr-10'>
 						<div className='font-semibold text-white text-center text-5xl'>
 							Cold Calling
 						</div>
@@ -65,6 +65,7 @@ function ColdCallingPage1() {
 							<GoHomePageButton />
 							<NextStepButton nextStepPath='/cold-calling-2' />
 						</div>
+						<div></div>
 					</div>
 				</div>
 			) : (

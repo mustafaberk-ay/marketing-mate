@@ -19,9 +19,9 @@ function EmailMarketingPage3() {
 				<div>
 					<Navbar />
 
-					<div className='flex flex-col space-y-4 pl-10 pr-10 pt-2'>
+					<div className='flex flex-col justify-around h-screen pl-10 pr-10'>
 						<div className='flex justify-between'>
-							<div className='text-white text-3xl mt-2'>
+							<div className='text-white text-3xl'>
 								Step 3: Image Generation
 							</div>
 							<div className='font-semibold mr-80 text-white text-center text-5xl'>
@@ -44,7 +44,7 @@ function EmailMarketingPage3() {
 								wrap='soft'
 								placeholder='Enter details to guide the creation of an image.'
 							></textarea>
-							<div className='flex items-center space-x-8 bg-lightBrown p-5 rounded-50'>
+							<div className='flex items-center space-x-8 bg-lightBrown px-5 rounded-50'>
 								<div className='space-x-2'>
 									<input
 										type='radio'
@@ -78,7 +78,7 @@ function EmailMarketingPage3() {
 							"Next Step".
 						</div>
 
-						<div className='flex justify-between pt-5'>
+						<div className='flex justify-between'>
 							<PrevStepButton prevStepPath='/email-marketing-2' />
 							<button
 								onClick={generateButtonOnClick}
@@ -92,6 +92,7 @@ function EmailMarketingPage3() {
 							</button>
 							<NextStepButton nextStepPath='/email-marketing-4' />
 						</div>
+						<div></div>
 					</div>
 				</div>
 			) : (

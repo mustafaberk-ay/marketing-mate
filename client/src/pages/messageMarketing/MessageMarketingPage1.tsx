@@ -12,7 +12,7 @@ function MessageMarketingPage1() {
 			{isAuthenticated ? (
 				<div>
 					<Navbar />
-					<div className='flex flex-col space-y-4 pl-10 pr-10 pt-2'>
+					<div className='flex flex-col justify-around h-screen pl-10 pr-10'>
 						<div className='font-semibold text-white text-center text-5xl'>
 							Message Marketing
 						</div>
@@ -67,7 +67,7 @@ function MessageMarketingPage1() {
 							</label>
 							<input
 								type='checkbox'
-								className='form-checkbox h-6 w-6 mt-2 '
+								className='form-checkbox h-6 w-6'
 							/>
 						</div>
 
@@ -75,6 +75,7 @@ function MessageMarketingPage1() {
 							<GoHomePageButton />
 							<NextStepButton nextStepPath='/message-marketing-2' />
 						</div>
+						<div></div>
 					</div>
 				</div>
 			) : (

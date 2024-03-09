@@ -18,21 +18,19 @@ function EmailMarketingPage2() {
 				<div>
 					<Navbar />
 
-					<div className='flex flex-col space-y-4 pl-10 pr-10 pt-2'>
+					<div className='flex flex-col justify-around h-screen pl-10 pr-10'>
 						<div className='font-semibold text-white text-center text-5xl'>
 							Email Marketing
 						</div>
 
-						<div className='text-white text-3xl '>
-							Step 2: Email Generation
-						</div>
+						<div className='text-white text-3xl '>Step 2: Email Generation</div>
 
 						<div className='flex space-x-8'>
 							<label className='text-white text-5xl font-extrabold mr-2'>
 								Generated Email:
 							</label>
 							<textarea
-								className='border-4 border-darkBrown h-64 rounded-md focus:outline-none focus:border-lightBrown w-3/5 text-2xl bg-darkBlue text-white mb-10'
+								className='border-4 border-darkBrown h-64 rounded-md focus:outline-none focus:border-lightBrown w-3/5 text-2xl bg-darkBlue text-white'
 								wrap='soft'
 								defaultValue='Waiting for the generated content'
 							></textarea>
@@ -43,11 +41,11 @@ function EmailMarketingPage2() {
 							text above. Otherwise, continue with the “Next Step”.
 						</div>
 
-						<div className='flex justify-between pt-11'>
+						<div className='flex justify-between'>
 							<PrevStepButton prevStepPath='/email-marketing-1' />
 							<button
 								onClick={generateButtonOnClick}
-								className='flex items-center justify-around bg-lightBrown text-white py-5 rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'
+								className='flex items-center justify-around bg-lightBrown text-white rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'
 							>
 								<img
 									className='h-8'
@@ -57,6 +55,7 @@ function EmailMarketingPage2() {
 							</button>
 							<NextStepButton nextStepPath='/email-marketing-3' />
 						</div>
+						<div></div>
 					</div>
 				</div>
 			) : (

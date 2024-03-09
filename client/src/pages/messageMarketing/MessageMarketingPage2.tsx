@@ -5,7 +5,6 @@ import PrevStepButton from '../../components/PrevStepButton';
 import NextStepButton from '../../components/NextStepButton';
 import generateImage from '/generate.png';
 
-
 function MessageMarketingPage2() {
 	const { isAuthenticated } = useAuth0();
 
@@ -19,7 +18,7 @@ function MessageMarketingPage2() {
 				<div>
 					<Navbar />
 
-					<div className='flex flex-col space-y-4 pl-10 pr-10 pt-2'>
+					<div className='flex flex-col justify-around h-screen pl-10 pr-10'>
 						<div className='font-semibold text-white text-center text-5xl'>
 							Message Marketing
 						</div>
@@ -44,11 +43,11 @@ function MessageMarketingPage2() {
 							text above. Otherwise, continue with the “Next Step”.
 						</div>
 
-						<div className='flex justify-between pt-11'>
+						<div className='flex justify-between'>
 							<PrevStepButton prevStepPath='/message-marketing-1' />
 							<button
 								onClick={generateButtonOnClick}
-								className='flex items-center justify-around bg-lightBrown text-white py-5 rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'
+								className='flex items-center justify-around bg-lightBrown text-white rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'
 							>
 								<img
 									className='h-8'
@@ -58,6 +57,7 @@ function MessageMarketingPage2() {
 							</button>
 							<NextStepButton nextStepPath='/message-marketing-3' />
 						</div>
+						<div></div>
 					</div>
 				</div>
 			) : (
@@ -67,4 +67,4 @@ function MessageMarketingPage2() {
 	);
 }
 
-export default MessageMarketingPage2
+export default MessageMarketingPage2;

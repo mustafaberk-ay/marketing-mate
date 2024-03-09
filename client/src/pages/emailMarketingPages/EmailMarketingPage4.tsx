@@ -18,14 +18,14 @@ function EmailMarketingPage4() {
 				<div>
 					<Navbar />
 
-					<div className='flex flex-col space-y-4 pl-10 pr-10 pt-2'>
+					<div className='flex flex-col justify-around h-screen pl-10 pr-10'>
 						<div className='font-semibold text-white text-center text-5xl'>
 							Email Marketing
 						</div>
 
 						<div className='text-white text-3xl '>Step 4: Send Email</div>
 
-						<div className='text-lightBrown text-center text-2xl pt-10'>
+						<div className='text-lightBrown text-center text-2xl'>
 							Enter the sender’s Gmail Address and Gmail App Password.
 						</div>
 
@@ -49,7 +49,7 @@ function EmailMarketingPage4() {
 							/>
 						</div>
 
-						<div className='text-lightBrown text-center text-2xl pt-10'>
+						<div className='text-lightBrown text-center text-2xl'>
 							Enter the receiver’s Gmail address
 						</div>
 
@@ -63,10 +63,10 @@ function EmailMarketingPage4() {
 							/>
 						</div>
 
-						<div className='flex justify-between pt-9'>
+						<div className='flex justify-between'>
 							<PrevStepButton prevStepPath='/email-marketing-3' />
 							<button
-								className='flex justify-around items-center bg-lightBrown text-white py-5 rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'
+								className='flex justify-around items-center bg-lightBrown text-white rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'
 								onClick={sendMessageButtonOnClick}
 							>
 								<img
@@ -77,6 +77,7 @@ function EmailMarketingPage4() {
 							</button>
 							<CompleteButton />
 						</div>
+						<div></div>
 					</div>
 				</div>
 			) : (
