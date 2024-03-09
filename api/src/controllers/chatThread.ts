@@ -32,6 +32,9 @@ export const sendMessage = async (req: Request, res: Response) => {
 export const getLastMessage = async (req: Request, res: Response) => {
     try {
         const response = await getLastMessageService();
+        if(response === "Last message does not contain text content."){
+            res.status(404)
+        }
         res.json(response);
     } catch (error) {
         res.json(error);
