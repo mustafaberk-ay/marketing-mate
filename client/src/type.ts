@@ -30,6 +30,15 @@ export interface UserInfo {
 	assistant_phone_number: string;
 }
 
+export interface ProductDetailsState {
+	productName: string,
+	productFeatures: string,
+	targetAudience: string,
+	contentTone: string,
+	isRequestedImage: boolean,
+	generatedContent: string
+}
+
 export interface UserInfoState {
 	facebookUserAccessToken: string;
 	gmailAddress: string;
