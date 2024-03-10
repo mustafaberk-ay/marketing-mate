@@ -36,7 +36,8 @@ export interface ProductDetailsState {
 	targetAudience: string,
 	contentTone: string,
 	isRequestedImage: boolean,
-	generatedContent: string
+	generatedContent: string,
+	generatedImageUrl: string
 }
 
 export interface UserInfoState {
