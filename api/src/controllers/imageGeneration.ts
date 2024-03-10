@@ -3,11 +3,12 @@ import { createImageVariationService, editImageService, generateImageService } f
 
 export const generateImage = async (req: Request, res: Response) => {
     try {
-        const prompt = req.body.prompt;
-        const style = req.body.style;
+        // const prompt = req.body.prompt;
+        // const style = req.body.style;
 
-        const response = await generateImageService(prompt, style);
-        res.json(response);
+        // const response = await generateImageService(prompt, style);
+        // res.json(response);
+        res.json('generate image endpoint called')
     } catch (error) {
         res.json(error);
     }
