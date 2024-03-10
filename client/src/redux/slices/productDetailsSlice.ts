@@ -7,7 +7,8 @@ const initialState: ProductDetailsState = {
 	targetAudience: '',
 	contentTone: '',
 	isRequestedImage: false,
-	generatedContent: ''
+	generatedContent: '',
+	generatedImageUrl: ''
 };
 
 export const productDetailsSlice = createSlice({
@@ -31,6 +32,9 @@ export const productDetailsSlice = createSlice({
 		},
 		setGeneratedContent: (state, action: PayloadAction<string>) => {
 			state.generatedContent = action.payload
+		},
+		setGeneratedImageUrl: (state, action: PayloadAction<string>) => {
+			state.generatedImageUrl = action.payload
 		}
 	},
 });
@@ -41,7 +45,8 @@ export const {
 	setTargetAudience,
 	setContentTone,
 	setIsRequestedImage,
-	setGeneratedContent
+	setGeneratedContent,
+	setGeneratedImageUrl
 } = productDetailsSlice.actions;
 
 export default productDetailsSlice.reducer
