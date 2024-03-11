@@ -5,16 +5,51 @@ import loginImage from '/login.png';
 import shareImage from '/share.png';
 import PrevStepButton from '../../components/PrevStepButton';
 import CompleteButton from '../../components/CompleteButton';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+
+interface PostData{
+	contactName: string,
+	messageContent: string,
+	imageUrl: string
+}
 
 function MessageMarketingPage4() {
 	const { isAuthenticated } = useAuth0();
 
-	function sendMessageButtonOnClick() {
-		console.log('sendMessageButtonOnClick');
+	const [contactName, setContactName] = useState<string>('')
+	const productInfo = useSelector((state: RootState) => state.productDetails);
+
+
+	function contactNameInputOnChange(e: React.ChangeEvent<HTMLTextAreaElement>){
+		setContactName(e.target.value)
 	}
 
-	function setupWhatsappButtonOnClick() {
+	async function sendMessageButtonOnClick() {
+		console.log('sendMessageButtonOnClick');
+		
+		const postData: PostData = {
+			contactName: contactName,
+			messageContent: productInfo.generatedContent,
+			imageUrl: productInfo.generatedImageUrl
+		}
+		console.log(postData, 'postData')
+
+		const res = await fetch('http://localhost:3000/whatsappMessage/sendWhatsappMessage', {
+			method: 'POST',
+			headers: {'Content-Type': 'application/json'},
+			body: JSON.stringify(postData)
+		})
+
+		console.log(await res.json())
+	}
+
+	async function setupWhatsappButtonOnClick() {
 		console.log('setupWhatsappButtonOnClick');
+
+		const res = await fetch('http://localhost:3000/whatsappMessage/setupWhatsapp')
+		console.log(await res.json())
 	}
 
 	return (
@@ -41,6 +76,7 @@ function MessageMarketingPage4() {
 							<textarea
 								className='border-4 bg-darkBlue text-white border-darkBrown rounded-md focus:outline-none focus:border-lightBrown w-1/5 text-2xl'
 								wrap='soft'
+								onChange={contactNameInputOnChange}
 							></textarea>
 						</div>
 

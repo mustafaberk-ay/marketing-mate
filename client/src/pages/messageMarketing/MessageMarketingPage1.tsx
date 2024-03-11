@@ -3,9 +3,84 @@ import Navbar from '../../components/Navbar';
 import NotLoggedIn from '../../components/NotLoggedIn';
 import GoHomePageButton from '../../components/GoHomePageButton';
 import NextStepButton from '../../components/NextStepButton';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+import {
+	setContentTone,
+	setIsRequestedImage,
+	setProductFeatures,
+	setProductName,
+	setTargetAudience,
+} from '../../redux/slices/productDetailsSlice';
 
 function MessageMarketingPage1() {
 	const { isAuthenticated } = useAuth0();
+	const dispatch = useDispatch();
+	const productInfo = useSelector((state: RootState) => state.productDetails);
+
+	function productNameInputOnChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
+		dispatch(setProductName(e.target.value));
+	}
+
+	function productFeaturesInputOnChange(
+		e: React.ChangeEvent<HTMLTextAreaElement>
+	) {
+		dispatch(setProductFeatures(e.target.value));
+	}
+
+	function targetAudienceInputOnChange(
+		e: React.ChangeEvent<HTMLTextAreaElement>
+	) {
+		dispatch(setTargetAudience(e.target.value));
+	}
+
+	function contentToneInputOnChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
+		dispatch(setContentTone(e.target.value));
+	}
+
+	function isRequestedImageInputOnChange(
+		e: React.ChangeEvent<HTMLInputElement>
+	) {
+		dispatch(setIsRequestedImage(e.target.checked));
+	}
+
+	async function nextStepButtonOnClick() {
+		interface PostData {
+			userMessage: string;
+		}
+
+		const reqBody: PostData = {
+			userMessage: `platform: Instagram,
+				action:create a post, 
+				parameters: 
+				productName: ${productInfo.productName}, 
+				keyFeatures: ${productInfo.productFeatures}, 
+				tone: ${productInfo.contentTone}, 
+				targetAudience: ${productInfo.targetAudience}`,
+		};
+
+		const res = await fetch('http://localhost:3000/chatThread/sendMessage', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(reqBody),
+		});
+
+		console.log(res.status, 'send message res status');
+		console.log(await res.json());
+	}
+
+	function IsInputsValid(): boolean {
+		if (
+			productInfo.productName &&
+			productInfo.productFeatures &&
+			productInfo.targetAudience &&
+			productInfo.contentTone
+		)
+			return true;
+		return false;
+	}
 
 	return (
 		<div>
@@ -28,6 +103,8 @@ function MessageMarketingPage1() {
 							<textarea
 								className='border-4 bg-darkBlue text-white border-darkBrown rounded-md focus:outline-none focus:border-lightBrown w-3/5 px-2 text-2xl'
 								wrap='soft'
+								onChange={productNameInputOnChange}
+								value={productInfo.productName}
 							></textarea>
 						</div>
 
@@ -38,6 +115,8 @@ function MessageMarketingPage1() {
 							<textarea
 								className='border-4 bg-darkBlue text-white border-darkBrown rounded-md focus:outline-none focus:border-lightBrown w-3/5 text-2xl'
 								wrap='soft'
+								onChange={productFeaturesInputOnChange}
+								value={productInfo.productFeatures}
 							></textarea>
 						</div>
 
@@ -48,6 +127,8 @@ function MessageMarketingPage1() {
 							<textarea
 								className='border-4 bg-darkBlue text-white border-darkBrown rounded-md focus:outline-none focus:border-lightBrown w-3/5 text-2xl'
 								wrap='soft'
+								onChange={targetAudienceInputOnChange}
+								value={productInfo.targetAudience}
 							></textarea>
 						</div>
 
@@ -58,6 +139,8 @@ function MessageMarketingPage1() {
 							<textarea
 								className='border-4 bg-darkBlue text-white border-darkBrown rounded-md focus:outline-none focus:border-lightBrown w-3/5 text-2xl'
 								wrap='soft'
+								onChange={contentToneInputOnChange}
+								value={productInfo.contentTone}
 							></textarea>
 						</div>
 
@@ -68,13 +151,28 @@ function MessageMarketingPage1() {
 							<input
 								type='checkbox'
 								className='form-checkbox h-6 w-6'
+								checked={productInfo.isRequestedImage}
+								onChange={isRequestedImageInputOnChange}
 							/>
 						</div>
 
 						<div className='flex justify-between'>
 							<GoHomePageButton />
-							<NextStepButton nextStepPath='/message-marketing-2' />
+							{IsInputsValid() ? (
+								<button onClick={nextStepButtonOnClick}>
+									<NextStepButton nextStepPath='/message-marketing-2' />
+								</button>
+							) : (
+								<button
+									className='pointer-events-none'
+									onClick={nextStepButtonOnClick}
+								>
+									<NextStepButton nextStepPath='/message-marketing-2' />
+								</button>
+							)}
 						</div>
+						<div></div>
+						<div></div>
 						<div></div>
 					</div>
 				</div>
@@ -85,4 +183,4 @@ function MessageMarketingPage1() {
 	);
 }
 
-export default MessageMarketingPage1
+export default MessageMarketingPage1;
