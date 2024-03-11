@@ -58,7 +58,7 @@ function MessageMarketingPage3() {
 		console.log(await res.json())
 		
 		//TODO: dispatch: setImageUrl to the response from imageGeneration endpoint
-		dispatch(setGeneratedImageUrl('https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Ffootball%2F&psig=AOvVaw0kqFeBrq4Myxg02U1z8-4y&ust=1710182408430000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCNCkm4qs6oQDFQAAAAAdAAAAABAE'))
+		dispatch(setGeneratedImageUrl('https://images.pexels.com/photos/46798/the-ball-stadion-football-the-pitch-46798.jpeg'))
 	}
 
 	return (
