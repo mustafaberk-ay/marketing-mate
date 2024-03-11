@@ -34,7 +34,6 @@ function MessageMarketingPage4() {
 			messageContent: productInfo.generatedContent,
 			imageUrl: productInfo.generatedImageUrl
 		}
-		console.log(postData, 'postData')
 
 		const res = await fetch('http://localhost:3000/whatsappMessage/sendWhatsappMessage', {
 			method: 'POST',
