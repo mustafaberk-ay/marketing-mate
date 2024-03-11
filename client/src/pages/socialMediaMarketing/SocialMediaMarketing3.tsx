@@ -53,7 +53,7 @@ function SocialMediaMarketingPage3() {
 			body: JSON.stringify(reqBody)
 		});
 
-		console.log(res.status, 'send message res status')
+		console.log(res.status, 'generate image res status')
 		console.log(await res.json())
 		
 		//TODO: dispatch: setImageUrl to the response from imageGeneration endpoint
@@ -92,6 +92,7 @@ function SocialMediaMarketingPage3() {
 								placeholder='Enter details to guide the creation of an image.'
 								onChange={imageDetailsInputOnChange}
 							></textarea>
+							
 							<div className='flex items-center space-x-8 bg-lightBrown px-5 rounded-50'>
 								<div className='space-x-2'>
 									<input
