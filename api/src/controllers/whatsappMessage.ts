@@ -12,8 +12,8 @@ export const setupWhatsapp = async (req: Request, res: Response) => {
 
 export const sendWhatsappMessage = async (req: Request, res: Response) => {
 	try {
-		const { contactName, messageContent } = req.body;
-		const response = await sendWhatsappMessageService(contactName, messageContent);
+		const { contactName, messageContent, imageUrl } = req.body;
+		const response = await sendWhatsappMessageService(contactName, messageContent, imageUrl);
 		res.status(200).json(response);
 	} catch (error) {
 		res.status(500).json(error);

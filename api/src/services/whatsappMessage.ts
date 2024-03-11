@@ -43,7 +43,8 @@ export async function setupWhatsappService() {
 
 export async function sendWhatsappMessageService(
 	contactName: string,
-	messageContent: string
+	messageContent: string,
+	imageUrl: string
 ) {
 	const options = new chrome.Options().setChromeBinaryPath('.\\chrome\\App\\Chrome-bin\\chrome.exe');
 
@@ -104,6 +105,9 @@ export async function sendWhatsappMessageService(
 		);
 
 		await messageInput.sendKeys(messageContent, Key.RETURN);
+
+		imageUrl = "Product Related Image: " + imageUrl
+		await messageInput.sendKeys(imageUrl, Key.RETURN);
 
 		const initialSentMessageCount = await (
 			await driver.findElements(By.css(sentStatusSelector))
