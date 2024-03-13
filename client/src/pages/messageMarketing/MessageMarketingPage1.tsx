@@ -50,8 +50,8 @@ function MessageMarketingPage1() {
 		}
 
 		const reqBody: PostData = {
-			userMessage: `platform: Instagram,
-				action:create a post, 
+			userMessage: `platform: Whatsapp,
+				action:create a message, 
 				parameters: 
 				productName: ${productInfo.productName}, 
 				keyFeatures: ${productInfo.productFeatures}, 
