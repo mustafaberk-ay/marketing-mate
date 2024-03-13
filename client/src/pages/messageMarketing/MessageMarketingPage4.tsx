@@ -9,46 +9,50 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 
-interface PostData{
-	contactName: string,
-	messageContent: string,
-	imageUrl: string
+interface PostData {
+	contactName: string;
+	messageContent: string;
+	imageUrl: string;
 }
 
 function MessageMarketingPage4() {
 	const { isAuthenticated } = useAuth0();
 
-	const [contactName, setContactName] = useState<string>('')
+	const [contactName, setContactName] = useState<string>('');
 	const productInfo = useSelector((state: RootState) => state.productDetails);
 
-
-	function contactNameInputOnChange(e: React.ChangeEvent<HTMLTextAreaElement>){
-		setContactName(e.target.value)
+	function contactNameInputOnChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
+		setContactName(e.target.value);
 	}
 
 	async function sendMessageButtonOnClick() {
 		console.log('sendMessageButtonOnClick');
-		
+
 		const postData: PostData = {
 			contactName: contactName,
 			messageContent: productInfo.generatedContent,
-			imageUrl: productInfo.generatedImageUrl
-		}
+			imageUrl: productInfo.generatedImageUrl,
+		};
 
-		const res = await fetch('http://localhost:3000/whatsappMessage/sendWhatsappMessage', {
-			method: 'POST',
-			headers: {'Content-Type': 'application/json'},
-			body: JSON.stringify(postData)
-		})
+		const res = await fetch(
+			'http://localhost:3000/whatsappMessage/sendWhatsappMessage',
+			{
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(postData),
+			}
+		);
 
-		console.log(await res.json())
+		console.log(await res.json());
 	}
 
 	async function setupWhatsappButtonOnClick() {
 		console.log('setupWhatsappButtonOnClick');
 
-		const res = await fetch('http://localhost:3000/whatsappMessage/setupWhatsapp')
-		console.log(await res.json())
+		const res = await fetch(
+			'http://localhost:3000/whatsappMessage/setupWhatsapp'
+		);
+		console.log(await res.json());
 	}
 
 	return (
@@ -106,7 +110,11 @@ function MessageMarketingPage4() {
 							</button>
 						</div>
 						<div className='flex justify-between'>
-							<PrevStepButton prevStepPath='/message-marketing-3' />
+							{productInfo.isRequestedImage ? (
+								<PrevStepButton prevStepPath='/message-marketing-3' />
+							) : (
+								<PrevStepButton prevStepPath='/message-marketing-2' />
+							)}
 							<CompleteButton />
 						</div>
 						<div></div>
