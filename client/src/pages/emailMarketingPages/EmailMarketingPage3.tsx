@@ -5,12 +5,69 @@ import bottleImage from '/bottle.png';
 import generateImage from '/generate.png';
 import PrevStepButton from '../../components/PrevStepButton';
 import NextStepButton from '../../components/NextStepButton';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+import { setGeneratedImageUrl } from '../../redux/slices/productDetailsSlice';
+
+interface PostData {
+	userMessage: string;
+	imagePrompt: string;
+	imageStyle: string;
+}
 
 function EmailMarketingPage3() {
 	const { isAuthenticated } = useAuth0();
 
-	function generateButtonOnClick() {
-		console.log('generate button clicked');
+	const dispatch = useDispatch();
+	const productInfo = useSelector((state: RootState) => state.productDetails);
+
+	const [imageDetails, setImageDetails] = useState<string>('');
+	const [imageStyle, setImageStyle] = useState<string>('vivid');
+
+	function imageDetailsInputOnChange(
+		e: React.ChangeEvent<HTMLTextAreaElement>
+	) {
+		setImageDetails(e.target.value);
+	}
+
+	function imageStyleInputOnChange(e: React.ChangeEvent<HTMLInputElement>) {
+		setImageStyle(e.target.value);
+	}
+
+	async function generateButtonOnClick() {
+		const reqBody: PostData = {
+			userMessage: `platform: Instagram,
+				action:create a post, 
+				parameters: 
+				productName: ${productInfo.productName}, 
+				keyFeatures: ${productInfo.productFeatures}, 
+				tone: ${productInfo.contentTone}, 
+				targetAudience: ${productInfo.targetAudience}`,
+			imagePrompt: imageDetails,
+			imageStyle: imageStyle,
+		};
+
+		const res = await fetch(
+			'http://localhost:3000/imageGeneration/generateImage',
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(reqBody),
+			}
+		);
+
+		console.log(res.status, 'generate image res status');
+		console.log(await res.json());
+
+		//TODO: dispatch: setImageUrl to the response from imageGeneration endpoint
+		dispatch(
+			setGeneratedImageUrl(
+				'https://images.pexels.com/photos/46798/the-ball-stadion-football-the-pitch-46798.jpeg'
+			)
+		);
 	}
 
 	return (
@@ -43,13 +100,17 @@ function EmailMarketingPage3() {
 								className='border-4 bg-darkBlue text-white border-darkBrown rounded-md focus:outline-none focus:border-lightBrown w-3/5 px-2 text-2xl'
 								wrap='soft'
 								placeholder='Enter details to guide the creation of an image.'
+								onChange={imageDetailsInputOnChange}
 							></textarea>
+
 							<div className='flex items-center space-x-8 bg-lightBrown px-5 rounded-50'>
 								<div className='space-x-2'>
 									<input
 										type='radio'
 										defaultChecked
 										name='style'
+										value='vivid'
+										onChange={imageStyleInputOnChange}
 										className='form-radio h-5 w-5'
 									/>
 									<label className='text-white'>Vivid</label>
@@ -59,6 +120,8 @@ function EmailMarketingPage3() {
 									<input
 										type='radio'
 										name='style'
+										value='natural'
+										onChange={imageStyleInputOnChange}
 										className='form-radio h-5 w-5'
 									/>
 									<label className='text-white'>Natural</label>
@@ -92,6 +155,7 @@ function EmailMarketingPage3() {
 							</button>
 							<NextStepButton nextStepPath='/email-marketing-4' />
 						</div>
+						<div></div>
 						<div></div>
 					</div>
 				</div>

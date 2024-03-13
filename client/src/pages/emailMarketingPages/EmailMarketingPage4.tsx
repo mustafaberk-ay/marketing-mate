@@ -4,12 +4,62 @@ import NotLoggedIn from '../../components/NotLoggedIn';
 import PrevStepButton from '../../components/PrevStepButton';
 import CompleteButton from '../../components/CompleteButton';
 import shareImage from '/share.png';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+
+interface PostData {
+	sender: string;
+	to: string;
+	message: string;
+	subject: string;
+	appPassword: string;
+}
 
 function EmailMarketingPage4() {
 	const { isAuthenticated } = useAuth0();
+	const productInfo = useSelector((state: RootState) => state.productDetails);
 
-	function sendMessageButtonOnClick(){
-		console.log('sendMessageButtonOnClick')
+	const [senderGmailAddress, setSenderGmailAddress] = useState<string>('');
+	const [senderAppPassword, setSenderAppPassword] = useState<string>('');
+	const [receiverEmailAddress, setReceiverEmailAddress] = useState<string>('');
+
+	function senderGmailAddressInputOnChange(
+		e: React.ChangeEvent<HTMLInputElement>
+	) {
+		setSenderGmailAddress(e.target.value);
+	}
+
+	function senderAppPasswordInputOnChange(
+		e: React.ChangeEvent<HTMLInputElement>
+	) {
+		setSenderAppPassword(e.target.value);
+	}
+
+	function receiverEmailAddressInputOnChange(
+		e: React.ChangeEvent<HTMLInputElement>
+	) {
+		setReceiverEmailAddress(e.target.value);
+	}
+
+	async function sendMessageButtonOnClick() {
+		console.log('sendMessageButtonOnClick');
+
+		const postData: PostData = {
+			to: receiverEmailAddress,
+			sender: senderGmailAddress,
+			message: productInfo.generatedContent,
+			subject: productInfo.productName, 
+			appPassword: senderAppPassword
+		}
+
+		const res = await fetch('http://localhost:3000/gmailEmail/sendGmailEmail', {
+			method: 'POST',
+			headers: {'Content-Type': 'application/json'},
+			body: JSON.stringify(postData)
+		})
+
+		console.log(await res.json())
 	}
 
 	return (
@@ -36,6 +86,7 @@ function EmailMarketingPage4() {
 							<input
 								type='text'
 								className='border-4 bg-darkBlue text-white border-darkBrown rounded-md focus:outline-none focus:border-lightBrown w-1/3 text-2xl'
+								onChange={senderGmailAddressInputOnChange}
 							/>
 						</div>
 
@@ -46,6 +97,7 @@ function EmailMarketingPage4() {
 							<input
 								type='password'
 								className='border-4 bg-darkBlue text-white border-darkBrown rounded-md focus:outline-none focus:border-lightBrown w-1/3 text-2xl'
+								onChange={senderAppPasswordInputOnChange}
 							/>
 						</div>
 
@@ -55,16 +107,21 @@ function EmailMarketingPage4() {
 
 						<div className='flex space-x-8 justify-center'>
 							<label className='text-white text-5xl mr-44 font-extrabold '>
-								Receiver's Gmail Address:
+								Receiver's Email Address:
 							</label>
 							<input
 								type='text'
 								className='border-4 bg-darkBlue text-white border-darkBrown rounded-md focus:outline-none focus:border-lightBrown w-1/3 text-2xl'
+								onChange={receiverEmailAddressInputOnChange}
 							/>
 						</div>
 
 						<div className='flex justify-between'>
-							<PrevStepButton prevStepPath='/email-marketing-3' />
+							{productInfo.isRequestedImage ? (
+								<PrevStepButton prevStepPath='/email-marketing-3' />
+							) : (
+								<PrevStepButton prevStepPath='/email-marketing-2' />
+							)}
 							<button
 								className='flex justify-around items-center bg-lightBrown text-white rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'
 								onClick={sendMessageButtonOnClick}
@@ -73,7 +130,7 @@ function EmailMarketingPage4() {
 									className='h-8'
 									src={shareImage}
 								/>
-								Send Message
+								Send Email
 							</button>
 							<CompleteButton />
 						</div>
