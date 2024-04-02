@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { createImageVariations, editImage, generateImage } from "../controllers/imageGeneration";
+//import { createImageVariations, editImage, generateImage } from "../controllers/imageGeneration";
+import { generateImage } from "../controllers/imageGeneration";
 
 export const imageGenerationRouter = Router();
 
 imageGenerationRouter.post('/generateImage', generateImage);
-imageGenerationRouter.post('/editImage', editImage);
-imageGenerationRouter.post('/createImageVariations', createImageVariations);
+// imageGenerationRouter.post('/editImage', editImage);
+// imageGenerationRouter.post('/createImageVariations', createImageVariations);
