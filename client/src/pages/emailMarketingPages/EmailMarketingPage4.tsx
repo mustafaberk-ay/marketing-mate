@@ -7,6 +7,7 @@ import shareImage from '/share.png';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
+import { encryptData } from '../../utils/encryptionUtils';
 
 interface PostData {
 	sender: string;
@@ -44,13 +45,14 @@ function EmailMarketingPage4() {
 
 	async function sendMessageButtonOnClick() {
 		console.log('sendMessageButtonOnClick');
+		const encryptedAppPassword = encryptData(senderAppPassword)
 
 		const postData: PostData = {
 			to: receiverEmailAddress,
 			sender: senderGmailAddress,
 			message: productInfo.generatedContent,
 			subject: productInfo.productName, 
-			appPassword: senderAppPassword
+			appPassword: encryptedAppPassword
 		}
 
 		const res = await fetch('http://localhost:3000/gmailEmail/sendGmailEmail', {
