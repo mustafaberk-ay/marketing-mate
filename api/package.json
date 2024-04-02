@@ -9,11 +9,13 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@types/crypto-js": "^4.2.2",
     "@types/mongodb": "^4.0.7",
     "@types/selenium-webdriver": "^4.1.21",
     "axios": "^1.6.5",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
+    "crypto-js": "^4.2.0",
     "dotenv": "^16.3.2",
     "express": "^4.18.2",
     "express-jwt": "^8.4.1",
