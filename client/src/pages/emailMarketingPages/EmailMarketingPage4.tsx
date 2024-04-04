@@ -51,7 +51,7 @@ function EmailMarketingPage4() {
 			to: receiverEmailAddress,
 			sender: senderGmailAddress,
 			message: productInfo.generatedContent,
-			subject: productInfo.productName, 
+			subject: productInfo.generatedEmailSubject, 
 			appPassword: encryptedAppPassword
 		}
 

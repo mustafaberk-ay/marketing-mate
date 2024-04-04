@@ -8,7 +8,10 @@ import { useEffect, useState } from 'react';
 import LoadingScreen from '../../components/LoadingScreen';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
-import { setGeneratedContent } from '../../redux/slices/productDetailsSlice';
+import {
+	setGeneratedContent,
+	setGeneratedEmailSubject,
+} from '../../redux/slices/productDetailsSlice';
 
 interface apiRes {
 	lastMessageText: string;
@@ -22,7 +25,8 @@ function EmailMarketingPage2() {
 	const dispatch = useDispatch();
 
 	const [isLoading, setIsLoading] = useState<boolean>(true);
-	const [content, setContent] = useState<string>('');
+	const [emailContent, setEmailContent] = useState<string>('');
+	const [subject, setSubject] = useState<string>('');
 	const [generateAgainClickCount, setGenerateAgainClickCount] =
 		useState<number>(0);
 
@@ -36,9 +40,13 @@ function EmailMarketingPage2() {
 			);
 
 			if (res.ok) {
-				setContent(await res.json());
-				//const data: apiRes = await res.json();
-				//setContent(data.lastMessageText);
+				const data: apiRes = await res.json();
+				const splittedStr = data.lastMessageText.split('&&');
+				const subject = splittedStr[0];
+				const emailContent = splittedStr[1];
+
+				setSubject(subject);
+				setEmailContent(emailContent);
 				setIsLoading(false);
 				clearInterval(intervalId); // Clear interval once the response is successful
 			}
@@ -85,16 +93,21 @@ function EmailMarketingPage2() {
 	}
 
 	function generatedContentOnChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
-		setContent(e.target.value);
+		setEmailContent(e.target.value);
+	}
+
+	function generatedSubjectOnChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
+		setSubject(e.target.value);
 	}
 
 	function isGeneratedContentValid(): boolean {
-		if (content) return true;
+		if (emailContent) return true;
 		return false;
 	}
 
 	function nextStepButtonOnClick() {
-		dispatch(setGeneratedContent(content));
+		dispatch(setGeneratedContent(emailContent));
+		dispatch(setGeneratedEmailSubject(subject));
 	}
 
 	return (
@@ -117,18 +130,30 @@ function EmailMarketingPage2() {
 
 							<div className='flex space-x-8'>
 								<label className='text-white text-5xl font-extrabold mr-2'>
+									Generated Subject:
+								</label>
+								<textarea
+									className='border-4 border-darkBrown rounded-md focus:outline-none focus:border-lightBrown w-3/5 text-2xl bg-darkBlue text-white'
+									value={subject}
+									onChange={generatedSubjectOnChange}
+								></textarea>
+							</div>
+
+							<div className='flex space-x-8'>
+								<label className='text-white text-5xl font-extrabold mr-12'>
 									Generated Email:
 								</label>
 								<textarea
 									className='border-4 border-darkBrown h-64 rounded-md focus:outline-none focus:border-lightBrown w-3/5 text-2xl bg-darkBlue text-white'
-									value={content}
+									value={emailContent}
 									onChange={generatedContentOnChange}
 								></textarea>
 							</div>
 
 							<div className='text-lightBrown text-center text-2xl'>
-								If you don’t like this email, click “Generate Again” or edit the
-								text above. Otherwise, continue with the “Next Step”.
+								If you don’t like this subject or email, click “Generate Again”
+								or edit the text above. Otherwise, continue with the “Next
+								Step”.
 							</div>
 
 							<div className='flex justify-between'>
