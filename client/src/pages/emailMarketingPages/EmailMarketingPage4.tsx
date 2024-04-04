@@ -45,23 +45,27 @@ function EmailMarketingPage4() {
 
 	async function sendMessageButtonOnClick() {
 		console.log('sendMessageButtonOnClick');
-		const encryptedAppPassword = encryptData(senderAppPassword)
+		const encryptedAppPassword = encryptData(senderAppPassword);
 
 		const postData: PostData = {
 			to: receiverEmailAddress,
 			sender: senderGmailAddress,
 			message: productInfo.generatedContent,
-			subject: productInfo.generatedEmailSubject, 
-			appPassword: encryptedAppPassword
-		}
+			subject: productInfo.generatedEmailSubject,
+			appPassword: encryptedAppPassword,
+		};
 
 		const res = await fetch('http://localhost:3000/gmailEmail/sendGmailEmail', {
 			method: 'POST',
-			headers: {'Content-Type': 'application/json'},
-			body: JSON.stringify(postData)
-		})
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(postData),
+		});
 
-		console.log(await res.json())
+		if(res.status === 200){
+			alert("Email sent successfully!")
+		}
+
+		console.log(await res.json());
 	}
 
 	return (
