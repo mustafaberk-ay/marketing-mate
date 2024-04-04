@@ -8,7 +8,8 @@ const initialState: ProductDetailsState = {
 	contentTone: '',
 	isRequestedImage: false,
 	generatedContent: '',
-	generatedImageUrl: ''
+	generatedImageUrl: '',
+	generatedEmailSubject: ''
 };
 
 export const productDetailsSlice = createSlice({
@@ -35,6 +36,9 @@ export const productDetailsSlice = createSlice({
 		},
 		setGeneratedImageUrl: (state, action: PayloadAction<string>) => {
 			state.generatedImageUrl = action.payload
+		},
+		setGeneratedEmailSubject: (state, action: PayloadAction<string>) => {
+			state.generatedEmailSubject = action.payload
 		}
 	},
 });
@@ -46,7 +50,8 @@ export const {
 	setContentTone,
 	setIsRequestedImage,
 	setGeneratedContent,
-	setGeneratedImageUrl
+	setGeneratedImageUrl,
+	setGeneratedEmailSubject
 } = productDetailsSlice.actions;
 
 export default productDetailsSlice.reducer

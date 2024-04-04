@@ -37,7 +37,8 @@ export interface ProductDetailsState {
 	contentTone: string,
 	isRequestedImage: boolean,
 	generatedContent: string,
-	generatedImageUrl: string
+	generatedImageUrl: string,
+	generatedEmailSubject: string
 }
 
 export interface UserInfoState {
