@@ -6,7 +6,6 @@ export const generateImage = async (req: Request, res: Response) => {
     try {
         const prompt = req.body.prompt;
         const style = req.body.style;
-
         const response = await generateImageService(prompt, style);
         res.json(response);
     } catch (error) {
