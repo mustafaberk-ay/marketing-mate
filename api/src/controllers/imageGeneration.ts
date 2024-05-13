@@ -4,12 +4,11 @@ import { generateImageService } from "../services/imageGeneration";
 
 export const generateImage = async (req: Request, res: Response) => {
     try {
-        // const prompt = req.body.prompt;
-        // const style = req.body.style;
+        const prompt = req.body.prompt;
+        const style = req.body.style;
 
-        // const response = await generateImageService(prompt, style);
-        // res.json(response);
-        res.json('generate image endpoint called')
+        const response = await generateImageService(prompt, style);
+        res.json(response);
     } catch (error) {
         res.json(error);
     }
