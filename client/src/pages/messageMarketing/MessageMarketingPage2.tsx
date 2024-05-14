@@ -27,6 +27,7 @@ function MessageMarketingPage2() {
 		useState<number>(0);
 
 	useEffect(() => {
+		// eslint-disable-next-line prefer-const
 		let intervalId: NodeJS.Timeout;
 
 		const fetchData = async () => {
@@ -36,9 +37,8 @@ function MessageMarketingPage2() {
 			);
 
 			if (res.ok) {
-				setContent(await res.json());
-				//const data: apiRes = await res.json();
-				//setContent(data.lastMessageText);
+				const data: apiRes = await res.json();
+				setContent(data.lastMessageText);
 				setIsLoading(false);
 				clearInterval(intervalId); // Clear interval once the response is successful
 			}
