@@ -31,6 +31,7 @@ function EmailMarketingPage2() {
 		useState<number>(0);
 
 	useEffect(() => {
+		// eslint-disable-next-line prefer-const
 		let intervalId: NodeJS.Timeout;
 
 		const fetchData = async () => {
