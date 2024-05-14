@@ -5,7 +5,8 @@ export async function sendGmailEmailService(
 	to: string,
 	message: string,
 	subject: string,
-	appPassword: string
+	appPassword: string,
+	imageUrl: string
 ) {
 	const transporter = nodemailer.createTransport({
 		host: 'smtp.gmail.com',
@@ -17,12 +18,17 @@ export async function sendGmailEmailService(
 		},
 	});
 
+	const htmlContent = `
+		<p>${message}</p>
+		<img src="${imageUrl}" alt="Image" style="width:auto; max-width:100%; height:auto;">`
+
     return new Promise((resolve, reject) => {
 		transporter.sendMail({
 			from: sender,
 			to: to,
 			subject: subject,
 			text: message,
+			html: htmlContent
 		}, (error, info) => {
 			transporter.close()
 			if (error) {
