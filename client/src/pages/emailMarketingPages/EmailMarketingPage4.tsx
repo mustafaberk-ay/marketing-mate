@@ -15,6 +15,7 @@ interface PostData {
 	message: string;
 	subject: string;
 	appPassword: string;
+	imageUrl: string;
 }
 
 function EmailMarketingPage4() {
@@ -53,6 +54,7 @@ function EmailMarketingPage4() {
 			message: productInfo.generatedContent,
 			subject: productInfo.generatedEmailSubject,
 			appPassword: encryptedAppPassword,
+			imageUrl: productInfo.generatedImageUrl
 		};
 
 		const res = await fetch('http://localhost:3000/gmailEmail/sendGmailEmail', {
