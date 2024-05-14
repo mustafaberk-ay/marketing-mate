@@ -11,14 +11,12 @@ import { RootState } from '../../redux/store';
 import { setGeneratedImageUrl } from '../../redux/slices/productDetailsSlice';
 
 interface PostData {
-	userMessage: string;
-	imagePrompt: string;
-	imageStyle: string;
+	prompt: string;
+	style: string;
 }
 
 function EmailMarketingPage3() {
 	const { isAuthenticated } = useAuth0();
-
 	const dispatch = useDispatch();
 	const productInfo = useSelector((state: RootState) => state.productDetails);
 
@@ -36,16 +34,10 @@ function EmailMarketingPage3() {
 	}
 
 	async function generateButtonOnClick() {
+		const info = `platform: Email, action: create an email, productName: ${productInfo.productName}, keyFeatures: ${productInfo.productFeatures}, tone: ${productInfo.contentTone}, targetAudience: ${productInfo.targetAudience}`;
 		const reqBody: PostData = {
-			userMessage: `platform: Instagram,
-				action:create a post, 
-				parameters: 
-				productName: ${productInfo.productName}, 
-				keyFeatures: ${productInfo.productFeatures}, 
-				tone: ${productInfo.contentTone}, 
-				targetAudience: ${productInfo.targetAudience}`,
-			imagePrompt: imageDetails,
-			imageStyle: imageStyle,
+			prompt: `${imageDetails}. The image should be created considering the following parameters: ${info}`,
+			style: imageStyle,
 		};
 
 		const res = await fetch(
@@ -59,15 +51,11 @@ function EmailMarketingPage3() {
 			}
 		);
 
-		console.log(res.status, 'generate image res status');
-		console.log(await res.json());
+		const data = await res.json();
 
-		//TODO: dispatch: setImageUrl to the response from imageGeneration endpoint
-		dispatch(
-			setGeneratedImageUrl(
-				'https://images.pexels.com/photos/46798/the-ball-stadion-football-the-pitch-46798.jpeg'
-			)
-		);
+		if (res.ok) {
+			dispatch(setGeneratedImageUrl(data));
+		}
 	}
 
 	return (
@@ -130,10 +118,17 @@ function EmailMarketingPage3() {
 						</div>
 
 						<div className='flex justify-center'>
-							<img
-								className='h-80'
-								src={bottleImage}
-							/>
+							{productInfo.generatedImageUrl === '' ? (
+								<img
+									className='h-80'
+									src={bottleImage}
+								/>
+							) : (
+								<img
+									className='h-80'
+									src={productInfo.generatedImageUrl}
+								/>
+							)}
 						</div>
 
 						<div className='text-lightBrown text-center text-2xl'>
