@@ -11,9 +11,8 @@ import { RootState } from '../../redux/store';
 import { setGeneratedImageUrl } from '../../redux/slices/productDetailsSlice';
 
 interface PostData {
-	userMessage: string;
-	imagePrompt: string;
-	imageStyle: string;
+	prompt: string;
+	style: string;
 }
 
 function MessageMarketingPage3() {
@@ -22,43 +21,42 @@ function MessageMarketingPage3() {
 	const dispatch = useDispatch();
 	const productInfo = useSelector((state: RootState) => state.productDetails);
 
-	const [imageDetails, setImageDetails] = useState<string>('')
-	const [imageStyle, setImageStyle] = useState<string>('vivid')
+	const [imageDetails, setImageDetails] = useState<string>('');
+	const [imageStyle, setImageStyle] = useState<string>('vivid');
 
-	function imageDetailsInputOnChange(e: React.ChangeEvent<HTMLTextAreaElement>){
-		setImageDetails(e.target.value)
+	function imageDetailsInputOnChange(
+		e: React.ChangeEvent<HTMLTextAreaElement>
+	) {
+		setImageDetails(e.target.value);
 	}
 
-	function imageStyleInputOnChange(e: React.ChangeEvent<HTMLInputElement>){
-		setImageStyle(e.target.value)
+	function imageStyleInputOnChange(e: React.ChangeEvent<HTMLInputElement>) {
+		setImageStyle(e.target.value);
 	}
 
 	async function generateButtonOnClick() {
+		const info = `platform: Whatsapp, action: create a message, productName: ${productInfo.productName}, keyFeatures: ${productInfo.productFeatures}, tone: ${productInfo.contentTone}, targetAudience: ${productInfo.targetAudience}`;
 		const reqBody: PostData = {
-			userMessage: `platform: Instagram,
-				action:create a post, 
-				parameters: 
-				productName: ${productInfo.productName}, 
-				keyFeatures: ${productInfo.productFeatures}, 
-				tone: ${productInfo.contentTone}, 
-				targetAudience: ${productInfo.targetAudience}`,
-			imagePrompt: imageDetails,
-			imageStyle: imageStyle
+			prompt: `${imageDetails}. The image should be created considering the following parameters: ${info}`,
+			style: imageStyle,
 		};
 
-		const res = await fetch('http://localhost:3000/imageGeneration/generateImage', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(reqBody)
-		});
+		const res = await fetch(
+			'http://localhost:3000/imageGeneration/generateImage',
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(reqBody),
+			}
+		);
 
-		console.log(res.status, 'generate image res status')
-		console.log(await res.json())
-		
-		//TODO: dispatch: setImageUrl to the response from imageGeneration endpoint
-		dispatch(setGeneratedImageUrl('https://images.pexels.com/photos/46798/the-ball-stadion-football-the-pitch-46798.jpeg'))
+		const data = await res.json();
+
+		if (res.ok) {
+			dispatch(setGeneratedImageUrl(data));
+		}
 	}
 
 	return (
@@ -93,7 +91,7 @@ function MessageMarketingPage3() {
 								placeholder='Enter details to guide the creation of an image.'
 								onChange={imageDetailsInputOnChange}
 							></textarea>
-							
+
 							<div className='flex items-center space-x-8 bg-lightBrown px-5 rounded-50'>
 								<div className='space-x-2'>
 									<input
@@ -120,10 +118,17 @@ function MessageMarketingPage3() {
 							</div>
 						</div>
 						<div className='flex justify-center'>
-							<img
-								className='h-80'
-								src={bottleImage}
-							/>
+							{productInfo.generatedImageUrl === '' ? (
+								<img
+									className='h-80'
+									src={bottleImage}
+								/>
+							) : (
+								<img
+									className='h-80'
+									src={productInfo.generatedImageUrl}
+								/>
+							)}
 						</div>
 
 						<div className='text-lightBrown text-center text-2xl'>
