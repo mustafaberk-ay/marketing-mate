@@ -106,7 +106,7 @@ export async function sendWhatsappMessageService(
 
 		await messageInput.sendKeys(messageContent, Key.RETURN);
 
-		imageUrl = "Product Related Image: " + imageUrl
+		imageUrl = "Product Image: " + imageUrl
 		await messageInput.sendKeys(imageUrl, Key.RETURN);
 
 		const initialSentMessageCount = await (
