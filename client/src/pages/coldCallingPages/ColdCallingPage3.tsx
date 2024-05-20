@@ -116,6 +116,7 @@ function ColdCallingPage3() {
 							<CompleteButton />
 						</div>
 						<div></div>
+						<div></div>
 					</div>
 				</div>
 			) : (

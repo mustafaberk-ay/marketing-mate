@@ -29,6 +29,7 @@ function ColdCallingPage2() {
 
 
 	useEffect(() => {
+		// eslint-disable-next-line prefer-const
 		let intervalId: NodeJS.Timeout;
 
 		const fetchData = async () => {
@@ -154,6 +155,7 @@ function ColdCallingPage2() {
 									</button>
 								)}
 							</div>
+							<div></div>
 							<div></div>
 						</div>
 					</div>

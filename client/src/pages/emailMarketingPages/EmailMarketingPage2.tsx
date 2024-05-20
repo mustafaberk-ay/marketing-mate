@@ -189,6 +189,8 @@ function EmailMarketingPage2() {
 								)}
 							</div>
 							<div></div>
+							<div></div>
+							<div></div>
 						</div>
 					</div>
 				)

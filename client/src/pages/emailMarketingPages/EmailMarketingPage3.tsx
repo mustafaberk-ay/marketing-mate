@@ -152,6 +152,12 @@ function EmailMarketingPage3() {
 						</div>
 						<div></div>
 						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
 					</div>
 				</div>
 			) : (
