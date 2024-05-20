@@ -34,10 +34,10 @@ export async function setupWhatsappService() {
 	await driver.get('https://web.whatsapp.com/');
 
 	await driver.wait(
-		until.elementLocated(By.css("[title='Search input textbox']"))
+		until.elementLocated(By.css("[title='Chats']"))
 	);
 
-	await driver.quit();
+	await driver.quit()
 	return 'Whatsapp Setup Successful';
 }
 
@@ -68,28 +68,31 @@ export async function sendWhatsappMessageService(
 		.build();
 
 		await driver.get('https://web.whatsapp.com/');
+		
 		await driver.wait(
-			until.elementLocated(By.css("[title='Search input textbox']"))
+			until.elementLocated(By.css("p.selectable-text.copyable-text.x15bjb6t.x1n2onr6"))
 		);
 
 		const sentStatusSelector = 'span[data-icon="msg-check"]';
 
 		const searchInput = await driver.findElement(
-			By.css("[title='Search input textbox']")
+			By.css("p.selectable-text.copyable-text.x15bjb6t.x1n2onr6")
 		);
+
+		searchInput.click()
+
 		await searchInput.sendKeys(contactName);
 
 		await driver.wait(
-			until.elementLocated(By.xpath(`//span[@title='${contactName}']`))
+			until.elementLocated(By.css(`span[title="${contactName}"]`))
 		);
 
-		//await driver.sleep(1000)
+		await driver.sleep(1000)
 
-		const contact = await driver.findElement(
-			By.xpath(`//span[@title='${contactName}']`)
-		);
+		const contact = await driver.findElement(By.css(`span[title="${contactName}"]`))
+
 		await driver.wait(
-			until.elementLocated(By.xpath(`//span[@title='${contactName}']`))
+			until.elementLocated(By.css(`span[title="${contactName}"]`))
 		);
 		await driver.executeScript('arguments[0].scrollIntoView(true);', contact);
 		await driver.wait(async function () {
@@ -98,21 +101,23 @@ export async function sendWhatsappMessageService(
 			return isEnabled && isDisplayed;
 		});
 		await contact.click();
-		await driver.wait(until.elementLocated(By.css("[title='Type a message']")));
+
+		await driver.wait(until.elementLocated(By.css("div[aria-label='Type a message']")));
 
 		const messageInput = await driver.findElement(
-			By.css("[title='Type a message']")
+			By.css("div[aria-label='Type a message']")
 		);
 
 		await messageInput.sendKeys(messageContent, Key.RETURN);
 
-		imageUrl = "Product Image: " + imageUrl
-		await messageInput.sendKeys(imageUrl, Key.RETURN);
-
+		if(imageUrl){
+			imageUrl = "Product Image: " + imageUrl
+			await messageInput.sendKeys(imageUrl, Key.RETURN);
+		}
+		
 		const initialSentMessageCount = await (
 			await driver.findElements(By.css(sentStatusSelector))
 		).length;
-		//console.log(initialSentMessageCount, 'initialSentMessageCount');
 
 		let finalSentMessageCount = await (
 			await driver.findElements(By.css(sentStatusSelector))
@@ -124,8 +129,6 @@ export async function sendWhatsappMessageService(
 				await driver.findElements(By.css(sentStatusSelector))
 			).length;
 		}
-
-		//console.log(finalSentMessageCount, 'finalSentMessageCount')
 
 		await driver.quit();
 	return 'Whatsapp Message Sent Successfully';
