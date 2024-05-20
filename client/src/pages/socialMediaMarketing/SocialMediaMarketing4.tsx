@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 interface FBResponse<T = any> {
 	data?: T[];
 	link?: string;
@@ -115,10 +116,11 @@ function SocialMediaMarketing4() {
 				const mediaObjectContainerId = await createMediaObjectContainer(
 					instagramAccountId
 				);
-				await publishMediaObjectContainer(
+				const response = await publishMediaObjectContainer(
 					instagramAccountId,
 					mediaObjectContainerId
 				);
+				return response
 			}
 		} catch (error) {
 			console.error(error);
@@ -130,8 +132,8 @@ function SocialMediaMarketing4() {
 			const facebookPages = await getFacebookPages();
 			const facebookPageId = facebookPages[0].id;
 			const pageToken = facebookPages[0].access_token;
-
-			await new Promise((resolve) => {
+	
+			const responseId = await new Promise((resolve, reject) => {
 				window.FB.api(
 					`${facebookPageId}/feed`,
 					'POST',
@@ -140,15 +142,23 @@ function SocialMediaMarketing4() {
 						link: productInfo.generatedImageUrl,
 						message: productInfo.generatedContent,
 					},
-					(response: { id: string }) => {
-						resolve(response.id);
+					(response: {id: string}) => {
+						if (response && response.id) {
+							resolve(response.id);
+						} else {
+							reject(new Error('Failed to post on Facebook'));
+						}
 					}
 				);
 			});
+	
+			return responseId;
 		} catch (error) {
 			console.error(error);
+			throw error;
 		}
 	};
+	
 
 	function isPostingFacebookOnChange(e: React.ChangeEvent<HTMLInputElement>) {
 		setIsPostingFacebook(e.target.checked);
@@ -158,15 +168,19 @@ function SocialMediaMarketing4() {
 		setIsPostingInstagram(e.target.checked);
 	}
 
-	function sharePostButtonOnClick() {
+	async function sharePostButtonOnClick() {
 		console.log('sharePostButtonOnClick');
 
 		if (isPostingFacebook) {
-			shareFacebookPost();
+			const facebookResponseId = await shareFacebookPost();
+			if(facebookResponseId)
+            alert(`Facebook post shared successfully`, );
 		}
 
 		if (isPostingInstagram) {
-			shareInstagramPost();
+			const instagramResponseId = await shareInstagramPost();
+			if(instagramResponseId)
+			alert(`Instagram post shared successfully`)
 		}
 	}
 
@@ -207,16 +221,6 @@ function SocialMediaMarketing4() {
 						</div>
 
 						<div className='flex justify-center space-x-28'>
-							<button
-								className='flex justify-around items-center bg-darkBrown text-white rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'
-								onClick={logInToFB}
-							>
-								<img
-									className='h-8'
-									src={loginImage}
-								/>
-								Login to <br /> Facebook
-							</button>
 							{facebookUserAccessToken ? (
 								<button
 									className='flex justify-around items-center bg-darkBrown text-white rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'
@@ -229,7 +233,16 @@ function SocialMediaMarketing4() {
 									Share Post
 								</button>
 							) : (
-								''
+								<button
+								className='flex justify-around items-center bg-darkBrown text-white rounded-50 w-96 h-20 text-3xl transition-transform hover:scale-110'
+								onClick={logInToFB}
+							>
+								<img
+									className='h-8'
+									src={loginImage}
+								/>
+								Login to <br /> Facebook
+							</button>
 							)}
 						</div>
 
