@@ -148,6 +148,8 @@ function SocialMediaMarketingPage3() {
 							<NextStepButton nextStepPath='/social-media-marketing-4' />
 						</div>
 						<div></div>
+						<div></div>
+						<div></div>
 					</div>
 				</div>
 			) : (
