@@ -43,7 +43,11 @@ function MessageMarketingPage4() {
 			}
 		);
 
-		console.log(await res.json());
+		const data = await res.json()
+		console.log(data);
+
+		if(data === "Whatsapp Message Sent Successfully")
+			alert('Whatsapp Message Sent Successfully')
 	}
 
 	async function setupWhatsappButtonOnClick() {
@@ -52,7 +56,12 @@ function MessageMarketingPage4() {
 		const res = await fetch(
 			'http://localhost:3000/whatsappMessage/setupWhatsapp'
 		);
-		console.log(await res.json());
+
+		const data = await res.json()
+		console.log(data);
+
+		if(data === "Whatsapp Setup Successful")
+			alert('Whatsapp Setup Successful')
 	}
 
 	return (
