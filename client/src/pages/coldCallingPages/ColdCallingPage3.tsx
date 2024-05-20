@@ -52,6 +52,10 @@ function ColdCallingPage3() {
 
 		const responseData = await res.json();
 		console.log(responseData, 'responseData');
+
+		if(res.ok){
+			alert('Call made successfully')
+		}
 	}
 
 	return (
